@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Uplift</string>
+    
+    <!-- AdMob - IDs de teste, substituir em produção -->
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
+    
+    <!-- Menu -->
+    <string name="action_initialize_db">Inicializar Database</string>
+    
+    <!-- Messages -->
+    <string name="loading">Carregando frases...</string>
+    <string name="no_quotes">Nenhuma frase encontrada</string>
+    <string name="share_quote">Compartilhar frase</string>
+</resources>
