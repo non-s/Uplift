@@ -23,6 +23,13 @@ google-services.json
 *.dex
 *.class
 
+# Build logs and artifacts
+build_*.txt
+build_*.log
+adb/
+hs_err_pid*.log
+replay_pid*.log
+
 # OS
 .DS_Store
 Thumbs.db

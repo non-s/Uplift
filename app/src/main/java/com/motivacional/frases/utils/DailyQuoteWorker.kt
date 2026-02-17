@@ -18,21 +18,50 @@ class DailyQuoteWorker(
     context: Context,
     params: WorkerParameters
 ) : CoroutineWorker(context, params) {
-    
-    private val repository = QuoteRepository()
-    
+
+    private val repository = QuoteRepository(context)
+    private val preferencesManager = PreferencesManager(context)
+
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
         try {
-            val quote = repository.getRandomQuote()
-            
-            quote?.let {
-                showNotification(it.text, it.author)
+            val currentTime = System.currentTimeMillis()
+            val lastQuoteTime = preferencesManager.getLastQuoteTimestamp()
+            val lastQuoteId = preferencesManager.getLastQuoteId()
+
+            // Verifica se é um novo dia (compara apenas a data, não o horário)
+            val shouldLoadNewQuote = !isSameDay(currentTime, lastQuoteTime)
+
+            if (shouldLoadNewQuote || lastQuoteId.isEmpty()) {
+                // Carregar nova frase aleatória
+                val quote = repository.getRandomQuote()
+
+                quote?.let {
+                    // Salvar timestamp e ID da nova frase
+                    preferencesManager.saveLastQuoteTimestamp(currentTime)
+                    preferencesManager.saveLastQuoteId(it.id)
+
+                    // Enviar notificação
+                    showNotification(it.text, it.author)
+                }
             }
-            
+            // Se ainda é o mesmo dia, não faz nada
+
             Result.success()
         } catch (e: Exception) {
+            e.printStackTrace()
             Result.retry()
         }
+    }
+
+    /**
+     * Verifica se duas timestamps são do mesmo dia
+     */
+    private fun isSameDay(time1: Long, time2: Long): Boolean {
+        if (time2 == 0L) return false
+        val cal1 = java.util.Calendar.getInstance().apply { timeInMillis = time1 }
+        val cal2 = java.util.Calendar.getInstance().apply { timeInMillis = time2 }
+        return cal1.get(java.util.Calendar.YEAR) == cal2.get(java.util.Calendar.YEAR) &&
+               cal1.get(java.util.Calendar.DAY_OF_YEAR) == cal2.get(java.util.Calendar.DAY_OF_YEAR)
     }
     
     private fun showNotification(quoteText: String, author: String) {
@@ -59,14 +88,15 @@ class DailyQuoteWorker(
         )
         
         val notification = NotificationCompat.Builder(applicationContext, channelId)
-            .setSmallIcon(android.R.drawable.star_on)
-            .setContentTitle("Frase do Dia")
+            .setSmallIcon(com.motivacional.frases.R.mipmap.ic_launcher)
+            .setContentTitle("✨ Sua Frase do Dia Chegou!")
             .setContentText(quoteText)
             .setStyle(NotificationCompat.BigTextStyle()
                 .bigText("\"$quoteText\"\n\n— $author"))
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
+            .setVibrate(longArrayOf(0, 200, 100, 200))
             .build()
         
         notificationManager.notify(1001, notification)

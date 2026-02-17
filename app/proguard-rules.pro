@@ -1,19 +1,72 @@
-# Add project specific ProGuard rules here.
--keepattributes *Annotation*
+# ProGuard Rules - Frases Motivacionais
+# Otimizado para release na Google Play Store
+
+# Keep line numbers for debugging stack traces
+-renamesourcefileattribute SourceFile
+-keepattributes SourceFile,LineNumberTable,*Annotation*
+
+# Remove logging in release builds
+-assumenosideeffects class android.util.Log {
+    public static *** d(...);
+    public static *** v(...);
+    public static *** i(...);
+}
+
+# Firebase & Google Services
+-keep class com.google.firebase.** { *; }
+-keep class com.google.android.gms.** { *; }
+-dontwarn com.google.firebase.**
+-dontwarn com.google.android.gms.**
+
+# Firestore
+-keep class com.google.firebase.firestore.** { *; }
 -keepclassmembers class * {
+    @com.google.firebase.firestore.PropertyName <methods>;
     @com.google.firebase.firestore.DocumentId <fields>;
 }
 
-# Firebase
--keep class com.google.firebase.** { *; }
--keep class com.google.android.gms.** { *; }
+# AdMob
+-keep class com.google.android.gms.ads.** { *; }
+-dontwarn com.google.android.gms.ads.**
+
+# Kotlin & Coroutines
+-keep class kotlin.** { *; }
+-keep class kotlin.Metadata { *; }
+-dontwarn kotlin.**
+-keepnames class kotlinx.coroutines.internal.MainDispatcherFactory {}
+-keepnames class kotlinx.coroutines.CoroutineExceptionHandler {}
+
+# Jetpack Compose
+-keep class androidx.compose.** { *; }
+-dontwarn androidx.compose.**
+
+# Room Database
+-keep class * extends androidx.room.RoomDatabase
+-keep @androidx.room.Entity class *
+-dontwarn androidx.room.paging.**
+
+# Data Models
+-keep class com.motivacional.frases.data.model.** { *; }
+-keep class com.motivacional.frases.data.local.entity.** { *; }
+
+# ViewModel
+-keep class * extends androidx.lifecycle.ViewModel { <init>(); }
 
 # Gson
 -keepattributes Signature
--keepattributes *Annotation*
 -dontwarn sun.misc.**
 -keep class com.google.gson.** { *; }
 -keep class * extends com.google.gson.TypeAdapter
 -keep class * implements com.google.gson.TypeAdapterFactory
 -keep class * implements com.google.gson.JsonSerializer
 -keep class * implements com.google.gson.JsonDeserializer
+
+# WorkManager
+-keep class * extends androidx.work.Worker
+-keep class androidx.work.** { *; }
+
+# Optimization
+-optimizations !code/simplification/arithmetic,!code/simplification/cast,!field/*,!class/merging/*
+-optimizationpasses 5
+-allowaccessmodification
+-repackageclasses

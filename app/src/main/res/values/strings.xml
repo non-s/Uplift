@@ -1,16 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Uplift</string>
-    
+
     <!-- AdMob - IDs de teste, substituir em produção -->
+    <string name="admob_app_id">ca-app-pub-3940256099942544~3347511713</string>
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
     <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
-    
+
     <!-- Menu -->
     <string name="action_initialize_db">Inicializar Database</string>
-    
+    <string name="action_sync_firebase">Sincronizar com Firebase</string>
+    <string name="action_settings">Configurações</string>
+    <string name="action_about">Sobre</string>
+
     <!-- Messages -->
     <string name="loading">Carregando frases...</string>
     <string name="no_quotes">Nenhuma frase encontrada</string>
     <string name="share_quote">Compartilhar frase</string>
+    <string name="quote_copied">Frase copiada!</string>
+    <string name="favorite_added">Adicionado aos favoritos</string>
+    <string name="favorite_removed">Removido dos favoritos</string>
+    <string name="error_loading">Erro ao carregar frases</string>
+    <string name="try_again">Tentar novamente</string>
+
+    <!-- Empty State -->
+    <string name="empty_state_title">Nenhuma frase encontrada</string>
+    <string name="empty_state_description">Adicione frases ao banco de dados para começar</string>
+    <string name="empty_favorites_title">Sem favoritos</string>
+    <string name="empty_favorites_description">Adicione frases aos favoritos para vê-las aqui</string>
+
+    <!-- Quote of the Day -->
+    <string name="quote_of_day">✨ Frase do Dia</string>
+
+    <!-- Actions -->
+    <string name="copy">Copiar</string>
+    <string name="favorite">Favoritar</string>
+    <string name="share">Compartilhar</string>
+    <string name="add_quotes">Adicionar Frases</string>
+
+    <!-- Settings -->
+    <string name="dark_mode">Modo Escuro</string>
+    <string name="notifications">Notificações</string>
+    <string name="daily_quote_notification">Notificação Diária de Frase</string>
+    <string name="notification_time">Horário da Notificação</string>
+
+    <!-- Share template -->
+    <string name="share_template">"%1$s"\n\n— %2$s\n\n📱 Compartilhado via Uplift</string>
+
+    <!-- Widget -->
+    <string name="widget_description">Veja frases motivacionais na sua tela inicial</string>
+    <string name="refresh">Atualizar</string>
 </resources>

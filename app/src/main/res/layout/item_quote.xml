@@ -1,77 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="4dp">
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="6dp"
+    app:cardBackgroundColor="?attr/colorSurface"
+    android:foreground="?attr/selectableItemBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/purple_200"
-            android:paddingStart="8dp"
-            android:paddingTop="4dp"
-            android:paddingEnd="8dp"
-            android:paddingBottom="4dp"
-            android:text="MOTIVAÇÃO"
-            android:textColor="@android:color/white"
-            android:textSize="10sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textQuote"
+        <!-- Accent bar no topo do card -->
+        <View
+            android:id="@+id/accentBar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:fontFamily="serif"
-            android:text="Texto da frase"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            android:textStyle="italic" />
-
-        <TextView
-            android:id="@+id/textAuthor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="end"
-            android:text="— Autor"
-            android:textColor="@color/purple_700"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:layout_height="4dp"
+            android:background="@color/primary" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:gravity="end"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:padding="20dp">
 
-            <ImageButton
-                android:id="@+id/btnFavorite"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Favoritar"
-                android:src="@android:drawable/btn_star_big_off" />
+            <!-- Cabeçalho com categoria -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/btnShare"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="8dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Compartilhar"
-                android:src="@android:drawable/ic_menu_share" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MOTIVAÇÃO"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    app:chipBackgroundColor="@color/primary"
+                    app:chipCornerRadius="12dp"
+                    app:chipMinHeight="24dp"
+                    app:chipStartPadding="12dp"
+                    app:chipEndPadding="12dp"
+                    tools:ignore="SmallSp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/textDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hoje"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="11sp"
+                    android:alpha="0.6"
+                    tools:ignore="SmallSp" />
+
+            </LinearLayout>
+
+            <!-- Aspas de abertura -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="&quot;"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="48sp"
+                android:fontFamily="serif"
+                android:alpha="0.3"
+                android:layout_marginStart="-4dp" />
+
+            <!-- Texto da frase -->
+            <TextView
+                android:id="@+id/textQuote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-24dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="serif"
+                android:text="Texto da frase motivacional que inspira e motiva as pessoas todos os dias"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="18sp"
+                android:lineSpacingExtra="4dp"
+                android:textStyle="italic" />
+
+            <!-- Autor -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="end|center_vertical"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="40dp"
+                    android:layout_height="2dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="?attr/colorPrimary"
+                    android:alpha="0.4" />
+
+                <TextView
+                    android:id="@+id/textAuthor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Autor Desconhecido"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="15sp"
+                    android:fontFamily="sans-serif-medium" />
+
+            </LinearLayout>
+
+            <!-- Divisor -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="12dp"
+                android:background="?attr/colorOnSurface"
+                android:alpha="0.1" />
+
+            <!-- Botões de ação -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCopy"
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Copiar"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="13sp"
+                    app:icon="@drawable/ic_copy"
+                    app:iconTint="?attr/colorOnSurface"
+                    app:iconSize="18dp"
+                    android:contentDescription="Copiar frase" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnFavorite"
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Favoritar"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="13sp"
+                    app:icon="@android:drawable/btn_star_big_off"
+                    app:iconTint="?attr/colorOnSurface"
+                    app:iconSize="20dp"
+                    android:contentDescription="Adicionar aos favoritos" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnShare"
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Compartilhar"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="13sp"
+                    app:icon="@android:drawable/ic_menu_share"
+                    app:iconTint="?attr/colorOnSurface"
+                    app:iconSize="18dp"
+                    android:contentDescription="Compartilhar frase" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
