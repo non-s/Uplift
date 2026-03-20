@@ -201,6 +201,32 @@ Duas modalidades:
 
 ---
 
+## CI/CD
+
+O repositório tem um workflow GitHub Actions (`.github/workflows/release.yml`) que é ativado a cada push no `master`. Ele:
+
+1. Compila o APK e o AAB em modo release
+2. Assina ambos com o keystore configurado nos Secrets do repositório
+3. Salva os artefatos por 30 dias na aba **Actions** do GitHub
+
+**Secrets necessários no repositório:**
+
+| Secret | Descrição |
+|---|---|
+| `KEYSTORE_BASE64` | Keystore codificado em base64 |
+| `KEYSTORE_PASSWORD` | Senha do keystore |
+| `KEY_ALIAS` | Alias da chave |
+| `KEY_PASSWORD` | Senha da chave |
+| `GOOGLE_SERVICES_JSON` | `google-services.json` codificado em base64 |
+
+---
+
+## Distribuição
+
+O APK gerado pelo CI pode ser distribuído via **APKPure**, **Uptodown** ou qualquer outra loja alternativa, ou enviado diretamente para os utilizadores.
+
+---
+
 ## Estrutura de Arquivos Raiz
 
 ```
@@ -216,17 +242,17 @@ Uplift/
 │   │       └── xml/                        # Configurações de widget e backup
 │   ├── build.gradle
 │   └── proguard-rules.pro
+├── .github/
+│   └── workflows/
+│       └── release.yml                     # CI: build + assinar APK e AAB
 ├── gradle/
 │   └── wrapper/
 ├── build.gradle
 ├── settings.gradle
 ├── gradle.properties
-├── screenshot.png
-└── Documentation/                          # Guias de configuração e publicação
-    ├── README.md
-    ├── COMECE_AQUI.md
-    ├── GUIA_FIREBASE.md
-    ├── COMPILAR_SEM_ANDROID_STUDIO.md
-    ├── PUBLICAR.md
-    └── GUIA_PUBLICACAO_COMPLETO.md
+├── COMECE_AQUI.md                          # Guia de início rápido
+├── GUIA_FIREBASE.md                        # Configuração do Firebase
+├── COMPILAR_SEM_ANDROID_STUDIO.md         # Build via linha de comando
+├── POLITICA_PRIVACIDADE.md                 # Política de privacidade do app
+└── screenshot.png
 ```
