@@ -26,14 +26,12 @@ import com.motivacional.frases.utils.PreferencesManager
 class SettingsActivity : ComponentActivity() {
 
     private val themeViewModel: ThemeViewModel by viewModels()
-    private lateinit var preferencesManager: PreferencesManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        preferencesManager = PreferencesManager(this)
         setContent {
             FrasesMotivacionaisTheme(themeViewModel = themeViewModel) {
-                SettingsScreen(themeViewModel = themeViewModel, preferencesManager = preferencesManager)
+                SettingsScreen(themeViewModel = themeViewModel)
             }
         }
     }
@@ -41,7 +39,7 @@ class SettingsActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsScreen(themeViewModel: ThemeViewModel, preferencesManager: PreferencesManager) {
+fun SettingsScreen(themeViewModel: ThemeViewModel) {
     val context = LocalContext.current
     val activity = context as? Activity
 

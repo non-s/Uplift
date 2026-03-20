@@ -45,16 +45,13 @@ class QuoteAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuoteViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_quote, parent, false)
+        // Animação apenas na criação da view, não na reutilização (evita re-animação ao scrollar)
+        view.startAnimation(AnimationUtils.loadAnimation(parent.context, R.anim.item_animation))
         return QuoteViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: QuoteViewHolder, position: Int) {
         holder.bind(quotes[position])
-
-        // Animação de entrada
-        holder.itemView.startAnimation(
-            AnimationUtils.loadAnimation(holder.itemView.context, R.anim.item_animation)
-        )
     }
 
     override fun getItemCount() = quotes.size

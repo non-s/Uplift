@@ -1,5 +1,4 @@
 # ProGuard Rules - Frases Motivacionais
-# Otimizado para release na Google Play Store
 
 # Keep line numbers for debugging stack traces
 -renamesourcefileattribute SourceFile
@@ -47,7 +46,7 @@
 
 # Data Models
 -keep class com.motivacional.frases.data.model.** { *; }
--keep class com.motivacional.frases.data.local.entity.** { *; }
+-keep class com.motivacional.frases.data.local.** { *; }
 
 # ViewModel
 -keep class * extends androidx.lifecycle.ViewModel { <init>(); }
@@ -63,6 +62,8 @@
 
 # WorkManager
 -keep class * extends androidx.work.Worker
+-keep class * extends androidx.work.CoroutineWorker
+-keep class * extends androidx.work.ListenableWorker
 -keep class androidx.work.** { *; }
 
 # Optimization

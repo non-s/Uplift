@@ -83,7 +83,7 @@ class DailyQuoteReceiver : BroadcastReceiver() {
 
         // Construir notificação
         val notification = NotificationCompat.Builder(context, channelId)
-            .setSmallIcon(R.mipmap.ic_launcher)
+            .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle("✨ Sua Frase do Dia Chegou!")
             .setContentText(quoteText)
             .setStyle(

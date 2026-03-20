@@ -26,6 +26,9 @@ class QuoteViewModel(application: Application) : AndroidViewModel(application) {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
+    private val _error = MutableStateFlow<String?>(null)
+    val error: StateFlow<String?> = _error
+
     init {
         loadAllQuotes()
     }
@@ -36,7 +39,7 @@ class QuoteViewModel(application: Application) : AndroidViewModel(application) {
                 val allQuotes = repository.getAllQuotes()
                 _quotes.value = allQuotes
             } catch (e: Exception) {
-                // Handle error
+                _error.value = "Erro ao carregar frases: ${e.message}"
             }
         }
     }
@@ -71,8 +74,7 @@ class QuoteViewModel(application: Application) : AndroidViewModel(application) {
                     _quote.value = todayQuote ?: repository.getRandomQuote()
                 }
             } catch (e: Exception) {
-                // Handle error
-                e.printStackTrace()
+                _error.value = "Erro ao carregar frase do dia: ${e.message}"
             } finally {
                 _isLoading.value = false
             }
@@ -97,11 +99,15 @@ class QuoteViewModel(application: Application) : AndroidViewModel(application) {
                 val randomQuote = repository.getRandomQuote()
                 _quote.value = randomQuote
             } catch (e: Exception) {
-                // Handle error
+                _error.value = "Erro ao carregar frase aleatória: ${e.message}"
             } finally {
                 _isLoading.value = false
             }
         }
+    }
+
+    fun clearError() {
+        _error.value = null
     }
 
     fun toggleFavorite() {
