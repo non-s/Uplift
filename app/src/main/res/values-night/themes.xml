@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Tema Escuro -->
+    <style name="Theme.FrasesMotivacionais" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Cores principais -->
+        <item name="colorPrimary">@color/primary_light</item>
+        <item name="colorPrimaryVariant">@color/primary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/accent_light</item>
+        <item name="colorSecondaryVariant">@color/accent</item>
+        <item name="colorOnSecondary">@color/black</item>
+
+        <!-- Cores de superfície -->
+        <item name="android:colorBackground">@color/background_dark</item>
+        <item name="colorSurface">@color/surface_dark</item>
+        <item name="colorOnSurface">@color/text_primary_dark</item>
+
+        <!-- Status bar e navigation bar -->
+        <item name="android:statusBarColor">@color/background_dark</item>
+        <item name="android:navigationBarColor">@color/surface_dark</item>
+        <item name="android:windowLightStatusBar">false</item>
+
+        <!-- Cores de erro -->
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/white</item>
+
+        <!-- Material Components -->
+        <item name="chipStyle">@style/Widget.App.Chip.Dark</item>
+        <item name="materialCardViewStyle">@style/Widget.App.CardView.Dark</item>
+        <item name="toolbarStyle">@style/Widget.App.Toolbar.Dark</item>
+
+        <!-- Text Appearance -->
+        <item name="textAppearanceHeadline1">@style/TextAppearance.App.Headline1.Dark</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.App.Headline2.Dark</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.App.Body1.Dark</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.App.Body2.Dark</item>
+    </style>
+
+    <!-- Chip personalizado tema escuro -->
+    <style name="Widget.App.Chip.Dark" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/surface_dark</item>
+        <item name="chipStrokeColor">@color/divider_dark</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="android:textColor">@color/text_primary_dark</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="chipCornerRadius">16dp</item>
+        <item name="chipMinHeight">40dp</item>
+        <item name="android:elevation">2dp</item>
+    </style>
+
+    <!-- CardView personalizado tema escuro -->
+    <style name="Widget.App.CardView.Dark" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">4dp</item>
+        <item name="cardBackgroundColor">@color/card_background_dark</item>
+        <item name="contentPadding">16dp</item>
+    </style>
+
+    <!-- Toolbar personalizada tema escuro -->
+    <style name="Widget.App.Toolbar.Dark" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="titleTextColor">@color/text_primary_dark</item>
+        <item name="android:elevation">4dp</item>
+        <item name="android:background">@color/surface_dark</item>
+    </style>
+
+    <!-- Text Appearances Dark -->
+    <style name="TextAppearance.App.Headline1.Dark" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="android:textColor">@color/text_primary_dark</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TextAppearance.App.Headline2.Dark" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textColor">@color/text_primary_dark</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TextAppearance.App.Body1.Dark" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/text_primary_dark</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.App.Body2.Dark" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textColor">@color/text_secondary_dark</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+</resources>

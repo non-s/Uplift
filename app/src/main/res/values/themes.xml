@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Tema Base Claro -->
+    <style name="Theme.FrasesMotivacionais" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Cores principais -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/accent</item>
+        <item name="colorSecondaryVariant">@color/accent</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!-- Cores de superfície -->
+        <item name="android:colorBackground">@color/background_light</item>
+        <item name="colorSurface">@color/surface_light</item>
+        <item name="colorOnSurface">@color/text_primary_light</item>
+
+        <!-- Status bar e navigation bar -->
+        <item name="android:statusBarColor">@color/primary</item>
+        <item name="android:navigationBarColor">@color/surface_light</item>
+        <item name="android:windowLightStatusBar">false</item>
+
+        <!-- Cores de erro -->
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/white</item>
+
+        <!-- Material Components -->
+        <item name="chipStyle">@style/Widget.App.Chip</item>
+        <item name="materialCardViewStyle">@style/Widget.App.CardView</item>
+        <item name="toolbarStyle">@style/Widget.App.Toolbar</item>
+
+        <!-- Text Appearance -->
+        <item name="textAppearanceHeadline1">@style/TextAppearance.App.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.App.Headline2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.App.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.App.Body2</item>
+    </style>
+
+    <!-- Tema Splash Screen -->
+    <style name="Theme.FrasesMotivacionais.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/primary</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="postSplashScreenTheme">@style/Theme.FrasesMotivacionais</item>
+        <item name="android:statusBarColor">@color/primary</item>
+    </style>
+
+    <!-- Chip personalizado -->
+    <style name="Widget.App.Chip" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/surface_light</item>
+        <item name="chipStrokeColor">@color/divider</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="android:textColor">@color/text_primary_light</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="chipCornerRadius">16dp</item>
+        <item name="chipMinHeight">40dp</item>
+        <item name="android:elevation">2dp</item>
+    </style>
+
+    <!-- CardView personalizado -->
+    <style name="Widget.App.CardView" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">4dp</item>
+        <item name="cardBackgroundColor">@color/card_background_light</item>
+        <item name="contentPadding">16dp</item>
+    </style>
+
+    <!-- Toolbar personalizada -->
+    <style name="Widget.App.Toolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="titleTextColor">@color/white</item>
+        <item name="android:elevation">4dp</item>
+    </style>
+
+    <!-- Text Appearances -->
+    <style name="TextAppearance.App.Headline1" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="android:textColor">@color/text_primary_light</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TextAppearance.App.Headline2" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textColor">@color/text_primary_light</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TextAppearance.App.Body1" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/text_primary_light</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.App.Body2" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textColor">@color/text_secondary_light</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <!-- Botão personalizado -->
+    <style name="Widget.App.Button" parent="Widget.MaterialComponents.Button">
+        <item name="cornerRadius">12dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <!-- Temas de Cores Diferentes -->
+    <!-- Purple Theme -->
+    <style name="Theme.FrasesMotivacionais.Purple" parent="Theme.FrasesMotivacionais">
+        <item name="colorPrimary">@color/purple_primary</item>
+        <item name="colorPrimaryVariant">@color/purple_primary_dark</item>
+        <item name="colorSecondary">@color/purple_accent</item>
+        <item name="android:statusBarColor">@color/purple_primary</item>
+    </style>
+
+    <!-- Green Theme -->
+    <style name="Theme.FrasesMotivacionais.Green" parent="Theme.FrasesMotivacionais">
+        <item name="colorPrimary">@color/green_primary</item>
+        <item name="colorPrimaryVariant">@color/green_primary_dark</item>
+        <item name="colorSecondary">@color/green_accent</item>
+        <item name="android:statusBarColor">@color/green_primary</item>
+    </style>
+
+    <!-- Orange Theme -->
+    <style name="Theme.FrasesMotivacionais.Orange" parent="Theme.FrasesMotivacionais">
+        <item name="colorPrimary">@color/orange_primary</item>
+        <item name="colorPrimaryVariant">@color/orange_primary_dark</item>
+        <item name="colorSecondary">@color/orange_accent</item>
+        <item name="android:statusBarColor">@color/orange_primary</item>
+    </style>
+
+    <!-- Pink Theme -->
+    <style name="Theme.FrasesMotivacionais.Pink" parent="Theme.FrasesMotivacionais">
+        <item name="colorPrimary">@color/pink_primary</item>
+        <item name="colorPrimaryVariant">@color/pink_primary_dark</item>
+        <item name="colorSecondary">@color/pink_accent</item>
+        <item name="android:statusBarColor">@color/pink_primary</item>
+    </style>
+
+    <!-- Red Theme -->
+    <style name="Theme.FrasesMotivacionais.Red" parent="Theme.FrasesMotivacionais">
+        <item name="colorPrimary">@color/red_primary</item>
+        <item name="colorPrimaryVariant">@color/red_primary_dark</item>
+        <item name="colorSecondary">@color/red_accent</item>
+        <item name="android:statusBarColor">@color/red_primary</item>
+    </style>
+</resources>

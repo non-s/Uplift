@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Tema Base Claro - API 27+ -->
+    <style name="Theme.FrasesMotivacionais" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Navigation bar - requer API 27+ -->
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+</resources>
