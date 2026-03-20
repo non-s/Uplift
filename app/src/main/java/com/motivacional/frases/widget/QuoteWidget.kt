@@ -66,6 +66,11 @@ class QuoteWidget : AppWidgetProvider() {
         )
         views.setOnClickPendingIntent(R.id.widget_refresh_button, refreshPendingIntent)
 
+        // Mostrar placeholder antes de lançar a coroutine para evitar race condition
+        views.setTextViewText(R.id.widget_quote_text, "Carregando frase...")
+        views.setTextViewText(R.id.widget_quote_author, "")
+        appWidgetManager.updateAppWidget(appWidgetId, views)
+
         // Buscar uma frase aleatória
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -94,11 +99,6 @@ class QuoteWidget : AppWidgetProvider() {
                 appWidgetManager.updateAppWidget(appWidgetId, views)
             }
         }
-
-        // Atualizar imediatamente com placeholder
-        views.setTextViewText(R.id.widget_quote_text, "Carregando frase...")
-        views.setTextViewText(R.id.widget_quote_author, "")
-        appWidgetManager.updateAppWidget(appWidgetId, views)
     }
 
     override fun onEnabled(context: Context) {

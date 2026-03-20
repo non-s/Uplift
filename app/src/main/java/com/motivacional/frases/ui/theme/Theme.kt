@@ -1,17 +1,11 @@
 package com.motivacional.frases.ui.theme
 
-import android.os.Build
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.motivacional.frases.ui.viewmodel.ThemeViewModel
@@ -415,12 +409,7 @@ fun FrasesMotivacionaisTheme(
     val themeColor by themeViewModel.themeColor.collectAsStateWithLifecycle()
     val fontSize by themeViewModel.fontSize.collectAsStateWithLifecycle()
 
-    val dynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
-    val context = LocalContext.current
-
     val colorScheme = when {
-        dynamicColor && darkTheme -> dynamicDarkColorScheme(context)
-        dynamicColor && !darkTheme -> dynamicLightColorScheme(context)
         darkTheme -> when (themeColor) {
             "purple" -> PurpleDarkColorScheme
             "green" -> GreenDarkColorScheme

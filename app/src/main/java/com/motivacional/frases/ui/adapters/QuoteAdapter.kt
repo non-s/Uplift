@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.chip.Chip
@@ -23,8 +24,22 @@ class QuoteAdapter(
     private var quotes: List<Quote> = emptyList()
 
     fun updateQuotes(newQuotes: List<Quote>) {
+        val diffCallback = QuoteDiffCallback(quotes, newQuotes)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
         quotes = newQuotes
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
+    }
+
+    private class QuoteDiffCallback(
+        private val oldList: List<Quote>,
+        private val newList: List<Quote>
+    ) : DiffUtil.Callback() {
+        override fun getOldListSize() = oldList.size
+        override fun getNewListSize() = newList.size
+        override fun areItemsTheSame(oldPos: Int, newPos: Int) =
+            oldList[oldPos].id == newList[newPos].id
+        override fun areContentsTheSame(oldPos: Int, newPos: Int) =
+            oldList[oldPos] == newList[newPos]
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuoteViewHolder {

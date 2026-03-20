@@ -56,7 +56,7 @@ class AdMobHelper(private val context: Context) {
             adCounter = 0
             
             interstitialAd?.let { ad ->
-                ad.show(activity)
+                // Definir callback ANTES de mostrar o anúncio
                 ad.fullScreenContentCallback = object : com.google.android.gms.ads.FullScreenContentCallback() {
                     override fun onAdDismissedFullScreenContent() {
                         interstitialAd = null
@@ -64,6 +64,7 @@ class AdMobHelper(private val context: Context) {
                         onAdClosed()
                     }
                 }
+                ad.show(activity)
             } ?: run {
                 loadInterstitialAd()
                 onAdClosed()
