@@ -14,14 +14,19 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FormatQuote
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.ContentCopy
 import androidx.compose.material.icons.outlined.Share
@@ -35,6 +40,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -42,10 +48,12 @@ import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import java.util.Calendar
 import com.motivacional.frases.R
 import com.motivacional.frases.data.model.Quote
 import com.motivacional.frases.ui.theme.FrasesMotivacionaisTheme
 import com.motivacional.frases.ui.viewmodel.QuoteViewModel
+import com.motivacional.frases.ui.viewmodel.ThemeViewModel
 import com.motivacional.frases.utils.DailyQuoteAlarmManager
 
 class MainActivity : ComponentActivity() {
@@ -60,9 +68,11 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MainScreen(viewModel: QuoteViewModel = viewModel()) {
+fun MainScreen(viewModel: QuoteViewModel = viewModel(), themeViewModel: ThemeViewModel = viewModel()) {
     val context = LocalContext.current
     val quote by viewModel.quote.collectAsStateWithLifecycle()
+    val themeColor by themeViewModel.themeColor.collectAsStateWithLifecycle()
+    val isDarkMode by themeViewModel.isDarkMode.collectAsStateWithLifecycle()
 
     // Solicitar permissão de notificação para Android 13+
     val notificationPermissionLauncher = rememberLauncherForActivityResult(
@@ -74,13 +84,33 @@ fun MainScreen(viewModel: QuoteViewModel = viewModel()) {
         }
     }
 
-    // Gradiente bonito e moderno
-    val gradientColors = listOf(
-        Color(0xFF667eea), // Roxo suave
-        Color(0xFF764ba2), // Roxo médio
-        Color(0xFFf093fb), // Rosa claro
-        Color(0xFF4facfe)  // Azul claro
+    // Gradiente bonito e moderno baseado no tema
+    val gradientColors = when (themeColor) {
+        "purple" -> if (isDarkMode) listOf(Color(0xFF4A148C), Color(0xFF7B1FA2), Color(0xFFCE93D8)) else listOf(Color(0xFFE1BEE7), Color(0xFFBA68C8), Color(0xFF9C27B0))
+        "green" -> if (isDarkMode) listOf(Color(0xFF1B5E20), Color(0xFF388E3C), Color(0xFFA5D6A7)) else listOf(Color(0xFFC8E6C9), Color(0xFF81C784), Color(0xFF4CAF50))
+        "orange" -> if (isDarkMode) listOf(Color(0xFFE65100), Color(0xFFF57C00), Color(0xFFFFCC80)) else listOf(Color(0xFFFFE0B2), Color(0xFFFFB74D), Color(0xFFFF9800))
+        "pink" -> if (isDarkMode) listOf(Color(0xFF880E4F), Color(0xFFC2185B), Color(0xFFF48FB1)) else listOf(Color(0xFFF8BBD0), Color(0xFFF06292), Color(0xFFE91E63))
+        "red" -> if (isDarkMode) listOf(Color(0xFFB71C1C), Color(0xFFD32F2F), Color(0xFFFF8A80)) else listOf(Color(0xFFFFCDD2), Color(0xFFE57373), Color(0xFFF44336))
+        else -> if (isDarkMode) listOf(Color(0xFF0D47A1), Color(0xFF1976D2), Color(0xFF90CAF9)) else listOf(Color(0xFFBBDEFB), Color(0xFF64B5F6), Color(0xFF2196F3)) // blue
+    }
+
+    val infiniteTransition = rememberInfiniteTransition(label = "gradient")
+    val offset by infiniteTransition.animateFloat(
+        initialValue = 0f,
+        targetValue = 1000f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(10000),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "gradient_offset"
     )
+
+    val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+    val greeting = when (currentHour) {
+        in 0..11 -> "Bom dia!"
+        in 12..17 -> "Boa tarde!"
+        else -> "Boa noite!"
+    }
 
     LaunchedEffect(key1 = true) {
         // Carregar frase do dia
@@ -113,8 +143,8 @@ fun MainScreen(viewModel: QuoteViewModel = viewModel()) {
             .background(
                 brush = Brush.linearGradient(
                     colors = gradientColors,
-                    start = Offset(0f, 0f),
-                    end = Offset(1000f, 1000f)
+                    start = Offset(offset, offset),
+                    end = Offset(offset + 1000f, offset + 1000f)
                 )
             )
     ) {
@@ -126,17 +156,46 @@ fun MainScreen(viewModel: QuoteViewModel = viewModel()) {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                // Frase
+                // Greeting
                 Text(
-                    text = "\"${it.text}\"",
+                    text = greeting,
+                    style = MaterialTheme.typography.titleLarge.copy(
+                        fontWeight = FontWeight.Bold
+                    ),
+                    color = Color.White.copy(alpha = 0.9f),
+                    modifier = Modifier.padding(bottom = 32.dp)
+                )
+
+                // Frase with quotes
+                Icon(
+                    imageVector = Icons.Filled.FormatQuote,
+                    contentDescription = null,
+                    tint = Color.White.copy(alpha = 0.5f),
+                    modifier = Modifier
+                        .size(48.dp)
+                        .align(Alignment.Start)
+                )
+
+                Text(
+                    text = it.text,
                     style = MaterialTheme.typography.headlineMedium.copy(
                         fontSize = 28.sp,
                         fontWeight = FontWeight.Medium,
+                        fontStyle = FontStyle.Italic,
                         lineHeight = 36.sp
                     ),
                     textAlign = TextAlign.Center,
                     color = Color.White,
-                    modifier = Modifier.padding(bottom = 24.dp)
+                    modifier = Modifier.padding(vertical = 16.dp, horizontal = 16.dp)
+                )
+
+                Icon(
+                    imageVector = Icons.Filled.FormatQuote,
+                    contentDescription = null,
+                    tint = Color.White.copy(alpha = 0.5f),
+                    modifier = Modifier
+                        .size(48.dp)
+                        .align(Alignment.End)
                 )
 
                 // Autor
