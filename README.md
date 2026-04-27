@@ -1,5 +1,11 @@
 # Uplift — App de Frases Motivacionais Android
 
+[![Build](https://github.com/non-s/Uplift/actions/workflows/release.yml/badge.svg?branch=master)](https://github.com/non-s/Uplift/actions/workflows/release.yml)
+[![Download APK](https://img.shields.io/github/v/release/non-s/Uplift?color=7c3aed&label=baixar%20APK&logo=android&logoColor=white)](https://github.com/non-s/Uplift/releases/latest/download/Uplift.apk)
+[![Android](https://img.shields.io/badge/Android-7%2B-3DDC84?logo=android&logoColor=white)](https://developer.android.com)
+[![Kotlin](https://img.shields.io/badge/Kotlin-2.0-7F52FF?logo=kotlin&logoColor=white)](https://kotlinlang.org)
+[![License](https://img.shields.io/github/license/non-s/Uplift?color=blue)](LICENSE)
+
 Aplicativo Android para frases motivacionais diárias com temas customizáveis, favoritos, notificações agendadas, widget para tela inicial e monetização via AdMob.
 
 ---
