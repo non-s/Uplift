@@ -3,6 +3,7 @@ buildscript {
     ext {
         kotlin_version = "2.0.0"
         compose_bom_version = "2024.12.01"
+        ksp_version = "2.0.0-1.0.21"
     }
     repositories {
         google()
@@ -12,6 +13,7 @@ buildscript {
         classpath 'com.android.tools.build:gradle:8.9.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.google.gms:google-services:4.4.0'
+        classpath "com.google.devtools.ksp:symbol-processing-gradle-plugin:$ksp_version"
     }
 }
 
