@@ -12,10 +12,34 @@
 </head>
 <body data-theme="purple">
 
+<!-- MODAL DE SUBMISSÃO -->
+<div class="submit-modal" id="submitModal">
+    <div class="submit-box">
+        <h3>Sugerir uma frase</h3>
+        <textarea class="sub-field" id="subText" placeholder="Digite a frase..." rows="3"></textarea>
+        <input class="sub-field" id="subAuthor" placeholder="Autor" />
+        <select class="sub-field" id="subCat">
+            <option value="motivacao">Motivação</option>
+            <option value="sucesso">Sucesso</option>
+            <option value="amor">Amor</option>
+            <option value="vida">Vida</option>
+            <option value="sabedoria">Sabedoria</option>
+        </select>
+        <p class="sub-error" id="subError"></p>
+        <div class="sub-actions">
+            <button class="btn-sub-cancel" id="btnCancelSubmit">Cancelar</button>
+            <button class="btn-sub-send"   id="btnSubmitQuote">Enviar</button>
+        </div>
+    </div>
+</div>
+
 <nav class="navbar">
     <div class="nav-container">
         <div class="nav-logo"><i class="fas fa-bolt"></i> Uplift</div>
         <div class="nav-actions">
+            <button id="btnOpenSubmit" class="btn-icon" title="Sugerir frase">
+                <i class="fas fa-plus"></i>
+            </button>
             <button id="favToggle" class="btn-icon" title="Favoritos">
                 <i class="fas fa-heart"></i><span id="favCount">0</span>
             </button>
@@ -63,6 +87,7 @@
     <section class="fav-panel" id="favPanel">
         <div class="fav-header">
             <h2><i class="fas fa-heart"></i> Favoritos</h2>
+            <button id="exportFavsBtn" class="btn-clear">Exportar</button>
             <button id="clearFavs" class="btn-clear">Limpar tudo</button>
         </div>
         <div class="fav-list" id="favList"></div>
@@ -76,6 +101,7 @@
     </p>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="script.js"></script>
 </body>
 </html>
