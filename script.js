@@ -87,7 +87,20 @@ async function initAuth() {
         const { data } = await sb.auth.signInAnonymously();
         state.userId = data.user?.id;
     }
+    await loadApprovedSubmissions();
     if (state.userId) await syncFavs();
+}
+
+async function loadApprovedSubmissions() {
+    const { data } = await sb.from('quote_submissions')
+        .select('text, author, cat')
+        .eq('approved', true);
+    if (!data?.length) return;
+    data.forEach(s => {
+        if (!QUOTES.some(q => q.text === s.text)) {
+            QUOTES.push({ text: s.text, author: s.author || 'Desconhecido', cat: s.cat || 'motivacao' });
+        }
+    });
 }
 
 /* ─── Favoritos (banco de dados) ─── */
@@ -279,3 +292,84 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+/* ══════════════════════════════════════════════════════════
+   PAINEL ADMIN — aprovar/rejeitar frases sugeridas
+   Acesso: adicione ?admin à URL
+   SQL necessário:
+     ALTER TABLE quote_submissions ADD COLUMN IF NOT EXISTS approved BOOLEAN DEFAULT FALSE;
+     CREATE POLICY "submissions_select" ON quote_submissions FOR SELECT USING (true);
+     CREATE POLICY "submissions_update" ON quote_submissions FOR UPDATE USING (true) WITH CHECK (true);
+   ══════════════════════════════════════════════════════════ */
+(async function initAdminPanel() {
+    if (!new URLSearchParams(window.location.search).has('admin')) return;
+
+    function hesc(s) {
+        return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    const panel = document.createElement('section');
+    panel.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg,#0d0d1a);z-index:9999;overflow-y:auto;padding:2rem;box-sizing:border-box;color:var(--text,#e2e8f0);font-family:Inter,sans-serif';
+    panel.innerHTML = `
+        <div style="max-width:760px;margin:0 auto">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem">
+                <h2 style="margin:0;font-size:1.3rem">⚡ Uplift — Aprovar Frases</h2>
+                <button id="adminClose" style="background:none;border:1px solid #444;color:inherit;padding:.4rem .9rem;border-radius:6px;cursor:pointer;font-size:.85rem">✕ Fechar</button>
+            </div>
+            <div id="adminStats" style="font-size:.85rem;color:#64748b;margin-bottom:1.5rem"></div>
+            <div id="adminList" style="display:flex;flex-direction:column;gap:.75rem">
+                <p style="color:#64748b">Carregando...</p>
+            </div>
+        </div>`;
+    document.body.appendChild(panel);
+
+    document.getElementById('adminClose').addEventListener('click', () => panel.remove());
+
+    async function loadSubmissions() {
+        const { data, error } = await sb.from('quote_submissions')
+            .select('*')
+            .order('created_at', { ascending: false });
+
+        const list = document.getElementById('adminList');
+        const stats = document.getElementById('adminStats');
+
+        if (error) {
+            list.innerHTML = `<p style="color:#f87171">Erro: ${hesc(error.message)}<br><small>Execute no Supabase: ALTER TABLE quote_submissions ADD COLUMN IF NOT EXISTS approved BOOLEAN DEFAULT FALSE; CREATE POLICY "submissions_select" ON quote_submissions FOR SELECT USING (true);</small></p>`;
+            return;
+        }
+        if (!data?.length) {
+            list.innerHTML = '<p style="color:#64748b">Nenhuma sugestão recebida ainda.</p>';
+            return;
+        }
+
+        const pending  = data.filter(s => !s.approved);
+        const approved = data.filter(s =>  s.approved);
+        stats.textContent = `${data.length} total · ${pending.length} pendentes · ${approved.length} aprovadas`;
+
+        list.innerHTML = data.map(s => `
+            <div id="row-${s.id}" style="background:#1a1a2e;border:1px solid ${s.approved ? '#22c55e44' : '#ffffff22'};border-radius:10px;padding:1rem 1.25rem">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:.5rem;flex-wrap:wrap">
+                    <span style="font-size:.75rem;padding:.2rem .6rem;border-radius:4px;background:${s.approved ? '#16a34a33' : '#f5a62333'};color:${s.approved ? '#4ade80' : '#fbbf24'}">${s.approved ? '✓ Aprovada' : '⏳ Pendente'}</span>
+                    <small style="color:#64748b;font-size:.75rem">${new Date(s.created_at).toLocaleString('pt-BR')}</small>
+                </div>
+                <p style="margin:.3rem 0 .2rem;font-size:1rem;line-height:1.5">"${hesc(s.text)}"</p>
+                <p style="margin:0 0 .75rem;font-size:.82rem;color:#94a3b8">— ${hesc(s.author)} · <em>${hesc(s.cat)}</em></p>
+                <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+                    ${!s.approved ? `<button onclick="adminApprove('${s.id}')" style="background:#16a34a;color:#fff;border:none;padding:.35rem .9rem;border-radius:6px;cursor:pointer;font-size:.82rem">✓ Aprovar</button>` : ''}
+                    <button onclick="adminDelete('${s.id}')" style="background:#dc262633;color:#f87171;border:1px solid #dc262655;padding:.35rem .9rem;border-radius:6px;cursor:pointer;font-size:.82rem">✕ Remover</button>
+                </div>
+            </div>`).join('');
+    }
+
+    window.adminApprove = async (id) => {
+        await sb.from('quote_submissions').update({ approved: true }).eq('id', id);
+        await loadSubmissions();
+    };
+    window.adminDelete = async (id) => {
+        if (!confirm('Remover esta sugestão?')) return;
+        await sb.from('quote_submissions').delete().eq('id', id);
+        await loadSubmissions();
+    };
+
+    await loadSubmissions();
+})();
