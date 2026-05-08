@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uplift — Frases Motivacionais</title>
+    <meta name="description" content="Frases motivacionais diárias com temas customizáveis e favoritos.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="purple">
+
+<!-- MODAL DE SUBMISSÃO -->
+<div class="submit-modal" id="submitModal">
+    <div class="submit-box">
+        <h3>Sugerir uma frase</h3>
+        <textarea class="sub-field" id="subText" placeholder="Digite a frase..." rows="3"></textarea>
+        <input class="sub-field" id="subAuthor" placeholder="Autor" />
+        <select class="sub-field" id="subCat">
+            <option value="motivacao">Motivação</option>
+            <option value="sucesso">Sucesso</option>
+            <option value="amor">Amor</option>
+            <option value="vida">Vida</option>
+            <option value="sabedoria">Sabedoria</option>
+        </select>
+        <p class="sub-error" id="subError"></p>
+        <div class="sub-actions">
+            <button class="btn-sub-cancel" id="btnCancelSubmit">Cancelar</button>
+            <button class="btn-sub-send"   id="btnSubmitQuote">Enviar</button>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-logo"><i class="fas fa-bolt"></i> Uplift</div>
+        <div class="nav-actions">
+            <button id="btnOpenSubmit" class="btn-icon" title="Sugerir frase">
+                <i class="fas fa-plus"></i>
+            </button>
+            <button id="favToggle" class="btn-icon" title="Favoritos">
+                <i class="fas fa-heart"></i><span id="favCount">0</span>
+            </button>
+            <div class="theme-picker">
+                <button class="theme-dot" data-theme="purple" title="Roxo"></button>
+                <button class="theme-dot" data-theme="blue" title="Azul"></button>
+                <button class="theme-dot" data-theme="green" title="Verde"></button>
+                <button class="theme-dot" data-theme="orange" title="Laranja"></button>
+                <button class="theme-dot" data-theme="pink" title="Rosa"></button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main>
+    <section class="hero">
+        <div class="categories">
+            <button class="cat-btn active" data-cat="all">Todas</button>
+            <button class="cat-btn" data-cat="motivacao">Motivação</button>
+            <button class="cat-btn" data-cat="sucesso">Sucesso</button>
+            <button class="cat-btn" data-cat="amor">Amor</button>
+            <button class="cat-btn" data-cat="vida">Vida</button>
+            <button class="cat-btn" data-cat="sabedoria">Sabedoria</button>
+        </div>
+
+        <div class="quote-card" id="quoteCard">
+            <div class="quote-mark">"</div>
+            <p class="quote-text" id="quoteText"></p>
+            <span class="quote-author" id="quoteAuthor"></span>
+            <span class="quote-cat-badge" id="quoteCat"></span>
+        </div>
+
+        <div class="quote-actions">
+            <button class="action-btn" id="favBtn" title="Favoritar"><i class="fas fa-heart"></i></button>
+            <button class="action-btn" id="shareBtn" title="Compartilhar"><i class="fas fa-share-alt"></i></button>
+            <button class="action-btn primary" id="nextBtn"><i class="fas fa-arrow-right"></i> Próxima</button>
+        </div>
+
+        <p class="progress-info">
+            <span id="quoteIndex">1</span> / <span id="quoteTotal">0</span>
+            &nbsp;·&nbsp; ← → para navegar
+        </p>
+    </section>
+
+    <section class="fav-panel" id="favPanel">
+        <div class="fav-header">
+            <h2><i class="fas fa-heart"></i> Favoritos</h2>
+            <button id="exportFavsBtn" class="btn-clear">Exportar</button>
+            <button id="clearFavs" class="btn-clear">Limpar tudo</button>
+        </div>
+        <div class="fav-list" id="favList"></div>
+    </section>
+</main>
+
+<footer class="footer">
+    <p>Uplift &copy; 2025 &nbsp;·&nbsp;
+        <a href="https://github.com/non-s/Uplift" target="_blank">GitHub</a> &nbsp;·&nbsp;
+        <a href="https://non-s.github.io/portfolio">Portfolio</a>
+    </p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="script.js"></script>
+</body>
+</html>

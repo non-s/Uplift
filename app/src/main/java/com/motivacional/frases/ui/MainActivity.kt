@@ -13,15 +13,16 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.*
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.ContentCopy
 import androidx.compose.material.icons.outlined.Share
@@ -30,6 +31,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -46,6 +48,7 @@ import com.motivacional.frases.R
 import com.motivacional.frases.data.model.Quote
 import com.motivacional.frases.ui.theme.FrasesMotivacionaisTheme
 import com.motivacional.frases.ui.viewmodel.QuoteViewModel
+import com.motivacional.frases.ui.viewmodel.ThemeViewModel
 import com.motivacional.frases.utils.DailyQuoteAlarmManager
 
 class MainActivity : ComponentActivity() {
@@ -59,160 +62,232 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(viewModel: QuoteViewModel = viewModel()) {
+fun MainScreen(
+    viewModel: QuoteViewModel = viewModel(),
+    themeViewModel: ThemeViewModel = viewModel()
+) {
     val context = LocalContext.current
     val quote by viewModel.quote.collectAsStateWithLifecycle()
+    val themeColor by themeViewModel.themeColor.collectAsStateWithLifecycle()
+    var isSwiping by remember { mutableStateOf(false) }
 
     // Solicitar permissão de notificação para Android 13+
     val notificationPermissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission()
     ) { isGranted ->
         if (isGranted) {
-            // Agendar alarme diário às 8:00 após permissão concedida
             DailyQuoteAlarmManager.scheduleDailyNotification(context)
         }
     }
 
-    // Gradiente bonito e moderno
-    val gradientColors = listOf(
-        Color(0xFF667eea), // Roxo suave
-        Color(0xFF764ba2), // Roxo médio
-        Color(0xFFf093fb), // Rosa claro
-        Color(0xFF4facfe)  // Azul claro
-    )
+    // Cores de gradiente baseadas no tema selecionado
+    val gradientColors = when (themeColor) {
+        "purple" -> listOf(Color(0xFF667eea), Color(0xFF764ba2))
+        "green" -> listOf(Color(0xFF11998e), Color(0xFF38ef7d))
+        "orange" -> listOf(Color(0xFFf2994a), Color(0xFFf2c94c))
+        "pink" -> listOf(Color(0xFFec008c), Color(0xFFfc6767))
+        "red" -> listOf(Color(0xFFe52d27), Color(0xFFb31217))
+        "blue" -> listOf(Color(0xFF2193b0), Color(0xFF6dd5ed))
+        else -> listOf(Color(0xFF667eea), Color(0xFF764ba2), Color(0xFFf093fb), Color(0xFF4facfe))
+    }
 
     LaunchedEffect(key1 = true) {
-        // Carregar frase do dia
         viewModel.loadDailyQuote()
-
-        // Verificar e solicitar permissão de notificação
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            when {
-                ContextCompat.checkSelfPermission(
-                    context,
-                    Manifest.permission.POST_NOTIFICATIONS
-                ) == PackageManager.PERMISSION_GRANTED -> {
-                    // Permissão já concedida, agendar alarme diário às 8:00
-                    DailyQuoteAlarmManager.scheduleDailyNotification(context)
-                }
-                else -> {
-                    // Solicitar permissão
-                    notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-                }
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+                DailyQuoteAlarmManager.scheduleDailyNotification(context)
+            } else {
+                notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
             }
         } else {
-            // Android 12 e inferior não precisa de permissão runtime
             DailyQuoteAlarmManager.scheduleDailyNotification(context)
         }
     }
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(
-                brush = Brush.linearGradient(
-                    colors = gradientColors,
-                    start = Offset(0f, 0f),
-                    end = Offset(1000f, 1000f)
+    Scaffold(
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = {
+                    Text(
+                        "Uplift",
+                        style = MaterialTheme.typography.titleLarge.copy(
+                            fontWeight = FontWeight.Bold,
+                            letterSpacing = 2.sp
+                        ),
+                        color = Color.White
+                    )
+                },
+                actions = {
+                    IconButton(onClick = { context.startActivity(Intent(context, SearchActivity::class.java)) }) {
+                        Icon(Icons.Default.Search, contentDescription = "Buscar", tint = Color.White)
+                    }
+                    IconButton(onClick = { context.startActivity(Intent(context, SettingsActivity::class.java)) }) {
+                        Icon(Icons.Default.Settings, contentDescription = "Configurações", tint = Color.White)
+                    }
+                },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = Color.Transparent
                 )
             )
-    ) {
-        quote?.let {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(32.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                // Frase
-                Text(
-                    text = "\"${it.text}\"",
-                    style = MaterialTheme.typography.headlineMedium.copy(
-                        fontSize = 28.sp,
-                        fontWeight = FontWeight.Medium,
-                        lineHeight = 36.sp
-                    ),
-                    textAlign = TextAlign.Center,
-                    color = Color.White,
-                    modifier = Modifier.padding(bottom = 24.dp)
+        },
+        containerColor = Color.Transparent
+    ) { paddingValues ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    brush = Brush.linearGradient(
+                        colors = gradientColors,
+                        start = Offset(0f, 0f),
+                        end = Offset(1000f, 1000f)
+                    )
                 )
-
-                // Autor
-                Text(
-                    text = "— ${it.author}",
-                    style = MaterialTheme.typography.titleMedium.copy(
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Normal
-                    ),
-                    textAlign = TextAlign.End,
-                    color = Color.White.copy(alpha = 0.9f),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 48.dp)
-                )
-
-                // Botões
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    // Botão Favoritar
-                    FloatingActionButton(
-                        onClick = { viewModel.toggleFavorite() },
-                        containerColor = Color.White.copy(alpha = 0.9f),
-                        contentColor = if (it.isFavorite) Color(0xFFE91E63) else Color(0xFF667eea),
-                        modifier = Modifier.size(64.dp)
-                    ) {
-                        Icon(
-                            imageVector = if (it.isFavorite) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
-                            contentDescription = "Favoritar",
-                            modifier = Modifier.size(28.dp)
-                        )
+                .padding(paddingValues)
+                .pointerInput(Unit) {
+                    detectHorizontalDragGestures(
+                        onDragStart = { isSwiping = true },
+                        onDragEnd = { isSwiping = false },
+                        onHorizontalDrag = { change, dragAmount ->
+                            if (dragAmount < -50 && !isSwiping) {
+                                viewModel.loadRandomQuote()
+                                isSwiping = true
+                            }
+                            if (dragAmount > 50 && !isSwiping) {
+                                viewModel.loadRandomQuote()
+                                isSwiping = true
+                            }
+                        }
+                    )
+                }
+        ) {
+            AnimatedContent(
+                targetState = quote,
+                transitionSpec = {
+                    if (targetState != initialState) {
+                        (slideInHorizontally { width -> width } + fadeIn()).togetherWith(
+                            slideOutHorizontally { width -> -width } + fadeOut())
+                    } else {
+                        fadeIn(animationSpec = tween(500)) togetherWith fadeOut(animationSpec = tween(500))
                     }
-
-                    // Botão Copiar
-                    FloatingActionButton(
-                        onClick = {
-                            copyQuoteToClipboard(context, it)
-                            Toast.makeText(context, "Frase copiada!", Toast.LENGTH_SHORT).show()
-                        },
-                        containerColor = Color.White.copy(alpha = 0.9f),
-                        contentColor = Color(0xFF667eea),
-                        modifier = Modifier.size(64.dp)
+                },
+                label = "quote_transition"
+            ) { targetQuote ->
+                targetQuote?.let {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(24.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
                     ) {
-                        Icon(
-                            imageVector = Icons.Outlined.ContentCopy,
-                            contentDescription = "Copiar",
-                            modifier = Modifier.size(28.dp)
-                        )
-                    }
+                        // Card Glassmorphism
+                        Card(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .wrapContentHeight(),
+                            shape = RoundedCornerShape(32.dp),
+                            colors = CardDefaults.cardColors(
+                                containerColor = Color.White.copy(alpha = 0.15f)
+                            ),
+                            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
+                        ) {
+                            Column(
+                                modifier = Modifier.padding(32.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Text(
+                                    text = "\"${it.text}\"",
+                                    style = MaterialTheme.typography.headlineMedium.copy(
+                                        fontSize = 26.sp,
+                                        fontWeight = FontWeight.SemiBold,
+                                        lineHeight = 38.sp
+                                    ),
+                                    textAlign = TextAlign.Center,
+                                    color = Color.White
+                                )
 
-                    // Botão Compartilhar
-                    FloatingActionButton(
-                        onClick = { shareQuote(context, it) },
-                        containerColor = Color.White.copy(alpha = 0.9f),
-                        contentColor = Color(0xFF667eea),
-                        modifier = Modifier.size(64.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.Share,
-                            contentDescription = "Compartilhar",
-                            modifier = Modifier.size(28.dp)
+                                Spacer(modifier = Modifier.height(24.dp))
+
+                                Text(
+                                    text = "— ${it.author}",
+                                    style = MaterialTheme.typography.titleMedium.copy(
+                                        fontSize = 18.sp,
+                                        fontWeight = FontWeight.Light
+                                    ),
+                                    color = Color.White.copy(alpha = 0.8f),
+                                    modifier = Modifier.align(Alignment.End)
+                                )
+                            }
+                        }
+
+                        Spacer(modifier = Modifier.height(48.dp))
+
+                        // Botões de Ação
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceEvenly,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            ActionButton(
+                                icon = if (it.isFavorite) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
+                                contentDescription = "Favoritar",
+                                tint = if (it.isFavorite) Color(0xFFF44336) else Color.White,
+                                onClick = { viewModel.toggleFavorite() }
+                            )
+
+                            ActionButton(
+                                icon = Icons.Outlined.ContentCopy,
+                                contentDescription = "Copiar",
+                                onClick = {
+                                    copyQuoteToClipboard(context, it)
+                                    Toast.makeText(context, "Copiado para o clipboard!", Toast.LENGTH_SHORT).show()
+                                }
+                            )
+
+                            ActionButton(
+                                icon = Icons.Outlined.Share,
+                                contentDescription = "Compartilhar",
+                                onClick = { shareQuote(context, it) }
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.height(64.dp))
+
+                        Text(
+                            text = "Arraste para o lado por mais inspiração ✨",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = Color.White.copy(alpha = 0.5f),
+                            textAlign = TextAlign.Center
                         )
                     }
                 }
-
-                // Informação sobre nova frase
-                Spacer(modifier = Modifier.height(48.dp))
-                Text(
-                    text = "Nova frase amanhã 🌅",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = Color.White.copy(alpha = 0.6f)
-                )
             }
         }
+    }
+}
+
+@Composable
+fun ActionButton(
+    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    contentDescription: String,
+    tint: Color = Color.White,
+    onClick: () -> Unit
+) {
+    FilledIconButton(
+        onClick = onClick,
+        modifier = Modifier.size(64.dp),
+        colors = IconButtonDefaults.filledIconButtonColors(
+            containerColor = Color.White.copy(alpha = 0.2f),
+            contentColor = tint
+        )
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = contentDescription,
+            modifier = Modifier.size(28.dp)
+        )
     }
 }
 

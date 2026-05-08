@@ -72,9 +72,11 @@ class DailyQuoteWorker(
             val channel = NotificationChannel(
                 channelId,
                 "Frase Diária",
-                NotificationManager.IMPORTANCE_DEFAULT
+                NotificationManager.IMPORTANCE_HIGH
             ).apply {
                 description = "Receba uma frase motivacional todos os dias"
+                enableVibration(true)
+                vibrationPattern = longArrayOf(0, 200, 100, 200)
             }
             notificationManager.createNotificationChannel(channel)
         }
@@ -88,7 +90,7 @@ class DailyQuoteWorker(
         )
         
         val notification = NotificationCompat.Builder(applicationContext, channelId)
-            .setSmallIcon(com.motivacional.frases.R.mipmap.ic_launcher)
+            .setSmallIcon(com.motivacional.frases.R.drawable.ic_notification)
             .setContentTitle("✨ Sua Frase do Dia Chegou!")
             .setContentText(quoteText)
             .setStyle(NotificationCompat.BigTextStyle()
