@@ -1,21 +1,21 @@
 # Uplift — Frases Motivacionais
 
-Web app de frases motivacionais com temas customizáveis, favoritos e compartilhamento.
+Aplicativo web com frases motivacionais, temas personalizáveis, favoritos e compartilhamento.
 
-**[→ Acessar o site](https://non-s.github.io/Uplift)**
+**[→ Abrir site](https://non-s.github.io/Uplift)**
 
 ## Funcionalidades
 
-- 40+ frases em 5 categorias: Motivação, Sucesso, Amor, Vida, Sabedoria
+- Mais de 40 frases em 5 categorias: Motivação, Sucesso, Amor, Vida, Sabedoria
 - 5 temas de cores (Roxo, Azul, Verde, Laranja, Rosa)
-- Favoritos salvos no navegador (localStorage)
+- Favoritos salvos no Supabase com autenticação anônima — sem cadastro, sem perda de dados
 - Compartilhamento nativo (Web Share API)
-- Navegação por teclado (← → ou espaço)
+- Navegação por teclado (← → ou Espaço)
 
 ## Stack
 
-HTML · CSS · JavaScript — puro, sem frameworks, sem build.
+HTML · CSS · JavaScript — sem frameworks, sem etapa de build.
 
 ---
 
-[Portfolio](https://non-s.github.io/portfolio) · [TakStud](https://non-s.github.io/TakStud)
+[Portfolio](https://non-s.github.io/Portfolio) · [TakStud](https://non-s.github.io/TakStud)
