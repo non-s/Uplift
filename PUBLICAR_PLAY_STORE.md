@@ -1,74 +1,74 @@
-# 📱 Guia Completo: Publicar na Google Play Store
+# Complete Guide: Publish on Google Play Store
 
-## 📋 Checklist de Pré-Publicação
+## Pre-Publication Checklist
 
-### 1. ⚙️ Configurações do Projeto
+### 1. Project Settings
 
-#### a) Atualizar IDs do AdMob
-📍 Arquivo: `app/src/main/res/values/strings.xml`
+#### a) Update AdMob IDs
+File: `app/src/main/res/values/strings.xml`
 
-Substitua os IDs de teste pelos seus IDs reais do AdMob:
+Replace test IDs with your real AdMob IDs:
 
 ```xml
-<!-- ANTES (IDs de teste) -->
+<!-- BEFORE (test IDs) -->
 <string name="admob_app_id">ca-app-pub-3940256099942544~3347511713</string>
 <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
 
-<!-- DEPOIS (Seus IDs reais) -->
+<!-- AFTER (your real IDs) -->
 <string name="admob_app_id">ca-app-pub-XXXXXXXXXXXXXXXX~XXXXXXXXXX</string>
 <string name="banner_ad_unit_id">ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX</string>
 <string name="interstitial_ad_unit_id">ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX</string>
 ```
 
-#### b) Verificar Versão
-📍 Arquivo: `app/build.gradle`
+#### b) Check Version
+File: `app/build.gradle`
 
 ```gradle
 defaultConfig {
     applicationId "com.motivacional.frases"
-    versionCode 1        // Incrementar a cada nova versão
-    versionName "1.0.0"  // Versão visível para usuários
+    versionCode 1        // Increment with each new version
+    versionName "1.0.0"  // Version visible to users
 }
 ```
 
-#### c) Firebase Configurado
-- ✅ `google-services.json` no diretório `app/`
-- ✅ Firestore ativado com frases cadastradas
-- ✅ Firebase Cloud Messaging configurado
-- ✅ Firebase Analytics ativo
+#### c) Firebase Configured
+- `google-services.json` in the `app/` directory
+- Firestore enabled with quotes added
+- Firebase Cloud Messaging configured
+- Firebase Analytics active
 
-### 2. 🔐 Criar Keystore (Assinatura Digital)
+### 2. Create Keystore (Digital Signature)
 
-#### Gerar Keystore
+#### Generate Keystore
 
 ```bash
 keytool -genkey -v -keystore uplift-release.jks -keyalg RSA -keysize 2048 -validity 10000 -alias uplift
 ```
 
-**Informações solicitadas:**
-- Nome completo: [Seu nome ou empresa]
-- Unidade organizacional: [Sua empresa ou "Independent"]
-- Organização: [Nome da organização]
-- Cidade: [Sua cidade]
-- Estado: [Seu estado/UF]
-- Código do país: BR
+**Information requested:**
+- Full name: [Your name or company]
+- Organizational unit: [Your company or "Independent"]
+- Organization: [Organization name]
+- City: [Your city]
+- State: [Your state]
+- Country code: US (or your country code)
 
-#### ⚠️ IMPORTANTE: Guardar com Segurança
+#### IMPORTANT: Store Safely
 
-Após criar, guarde em local seguro:
-- ✅ O arquivo `.jks` (keystore)
-- ✅ A senha do keystore
-- ✅ A senha da chave (alias)
-- ✅ O nome do alias
+After creating, keep in a safe place:
+- The `.jks` file (keystore)
+- The keystore password
+- The key password (alias)
+- The alias name
 
-**SE PERDER ESSAS INFORMAÇÕES, NUNCA MAIS PODERÁ ATUALIZAR O APP NA PLAY STORE!**
+**IF YOU LOSE THIS INFORMATION, YOU CAN NEVER UPDATE THE APP ON THE PLAY STORE!**
 
-#### Configurar no build.gradle
+#### Configure in build.gradle
 
-📍 Arquivo: `app/build.gradle`
+File: `app/build.gradle`
 
-Descomente e preencha:
+Uncomment and fill in:
 
 ```gradle
 android {
@@ -76,10 +76,10 @@ android {
 
     signingConfigs {
         release {
-            storeFile file("../uplift-release.jks")  // Caminho do keystore
-            storePassword "SUA_SENHA_STORE"
+            storeFile file("../uplift-release.jks")  // Keystore path
+            storePassword "YOUR_STORE_PASSWORD"
             keyAlias "uplift"
-            keyPassword "SUA_SENHA_KEY"
+            keyPassword "YOUR_KEY_PASSWORD"
         }
     }
 
@@ -94,315 +94,315 @@ android {
 }
 ```
 
-### 3. 🏗️ Gerar AAB/APK de Release
+### 3. Generate Release AAB/APK
 
-#### Opção A: Android Studio (Recomendado)
+#### Option A: Android Studio (Recommended)
 
 1. Build > Generate Signed Bundle / APK
-2. Escolha "Android App Bundle" (AAB)
-3. Selecione seu keystore
-4. Escolha build variant: `release`
-5. Clique em "Finish"
+2. Choose "Android App Bundle" (AAB)
+3. Select your keystore
+4. Choose build variant: `release`
+5. Click "Finish"
 
-O arquivo será gerado em: `app/build/outputs/bundle/release/app-release.aab`
+File generated at: `app/build/outputs/bundle/release/app-release.aab`
 
-#### Opção B: Linha de Comando
+#### Option B: Command Line
 
 ```bash
-# Gerar AAB (recomendado para Play Store)
+# Generate AAB (recommended for Play Store)
 ./gradlew bundleRelease
 
-# OU gerar APK
+# OR generate APK
 ./gradlew assembleRelease
 ```
 
-### 4. ✅ Testar o Build de Release
+### 4. Test the Release Build
 
 ```bash
-# Instalar APK de release no dispositivo
+# Install release APK on device
 adb install app/build/outputs/apk/release/app-release.apk
 ```
 
-**Checklist de testes:**
-- [ ] App abre sem crashes
-- [ ] Todas as telas funcionam
-- [ ] Anúncios aparecem (use IDs reais de teste do AdMob)
-- [ ] Firebase conecta e carrega frases
-- [ ] Favoritos funcionam
-- [ ] Compartilhamento funciona
-- [ ] Notificações funcionam
-- [ ] Modo escuro funciona
-- [ ] Copiar frase funciona
+**Test checklist:**
+- [ ] App opens without crashes
+- [ ] All screens work
+- [ ] Ads appear (use real AdMob test IDs)
+- [ ] Firebase connects and loads quotes
+- [ ] Favorites work
+- [ ] Sharing works
+- [ ] Notifications work
+- [ ] Dark mode works
+- [ ] Copy quote works
 
-## 🎨 Preparar Assets para Play Store
+## Prepare Assets for Play Store
 
-### 1. Ícone do App (512x512 px)
-- Formato: PNG de 32 bits
-- Tamanho: 512x512 pixels
-- Sem transparência
-- Pode ter cantos arredondados
+### 1. App Icon (512x512 px)
+- Format: 32-bit PNG
+- Size: 512x512 pixels
+- No transparency
+- Can have rounded corners
 
 ### 2. Feature Graphic (1024x500 px)
-- Banner promocional principal
-- Formato: PNG ou JPG
-- Tamanho: 1024x500 pixels
-- Aparece no topo da listagem
+- Main promotional banner
+- Format: PNG or JPG
+- Size: 1024x500 pixels
+- Appears at the top of the listing
 
 ### 3. Screenshots
 
-**Telefone (obrigatório):**
-- Mínimo: 2 screenshots
-- Máximo: 8 screenshots
-- Dimensões: Entre 320px e 3840px
-- Proporção: 16:9 ou 9:16
+**Phone (required):**
+- Minimum: 2 screenshots
+- Maximum: 8 screenshots
+- Dimensions: Between 320px and 3840px
+- Ratio: 16:9 or 9:16
 
-**Tablet (opcional mas recomendado):**
-- Mínimo: 2 screenshots
-- Mesmas regras dos screenshots de telefone
+**Tablet (optional but recommended):**
+- Minimum: 2 screenshots
+- Same rules as phone screenshots
 
-**Sugestões de screenshots:**
-1. Tela inicial com lista de frases
-2. Card de frase em destaque
-3. Frase do dia
-4. Tela de favoritos
-5. Filtro por categorias
-6. Modo escuro
-7. Notificação
-8. Compartilhamento
+**Screenshot suggestions:**
+1. Main screen with quote list
+2. Featured quote card
+3. Quote of the day
+4. Favorites screen
+5. Category filter
+6. Dark mode
+7. Notification
+8. Sharing
 
-### 4. Vídeo Promocional (opcional)
+### 4. Promotional Video (optional)
 - YouTube
-- 30 segundos a 2 minutos
-- Demonstra principais funcionalidades
+- 30 seconds to 2 minutes
+- Demonstrates main features
 
-## 📝 Criar Conta no Google Play Console
+## Create Account on Google Play Console
 
-### Passo a Passo
+### Step by Step
 
-1. Acesse: https://play.google.com/console
-2. Crie uma conta de desenvolvedor
-3. Pague a taxa única de $25 USD
-4. Complete seu perfil de desenvolvedor
+1. Go to: https://play.google.com/console
+2. Create a developer account
+3. Pay the one-time fee of $25 USD
+4. Complete your developer profile
 
-## 🚀 Publicar o App
+## Publish the App
 
-### 1. Criar Novo App
+### 1. Create New App
 
-1. Play Console > "Criar app"
-2. Preencher:
-   - Nome: "Uplift - Frases Motivacionais"
-   - Idioma padrão: Português (Brasil)
-   - Tipo: App
-   - Grátis ou pago: Grátis
-   - Declarações obrigatórias (aceitar termos)
+1. Play Console > "Create app"
+2. Fill in:
+   - Name: "Uplift - Motivational Quotes"
+   - Default language: English
+   - Type: App
+   - Free or paid: Free
+   - Required declarations (accept terms)
 
-### 2. Configurar Listagem da Loja
+### 2. Configure Store Listing
 
-#### Detalhes do App
-- **Título**: Uplift - Frases Motivacionais
-- **Descrição curta** (80 caracteres):
+#### App Details
+- **Title**: Uplift - Motivational Quotes
+- **Short description** (80 characters):
   ```
-  Frases inspiradoras diárias com categorias, favoritos e compartilhamento
-  ```
-
-- **Descrição completa** (até 4000 caracteres):
-  ```
-  ✨ Uplift - Sua Dose Diária de Motivação
-
-  Receba frases inspiradoras todos os dias e transforme sua rotina com mensagens positivas!
-
-  🌟 PRINCIPAIS FUNCIONALIDADES:
-
-  📚 CATEGORIAS VARIADAS
-  • Motivação
-  • Sucesso
-  • Amor
-  • Vida
-  • Sabedoria
-
-  ⭐ FAVORITOS
-  Salve suas frases preferidas e acesse rapidamente
-
-  📤 COMPARTILHE
-  Envie frases para amigos via WhatsApp, Instagram, Facebook e muito mais
-
-  🔔 NOTIFICAÇÕES DIÁRIAS
-  Receba uma frase motivacional todo dia no horário que preferir
-
-  🎯 FRASE DO DIA
-  Destaque especial com a melhor frase do dia
-
-  🌙 MODO ESCURO
-  Interface moderna com tema claro e escuro automático
-
-  💎 INTERFACE ELEGANTE
-  Design moderno com Material Design 3, animações suaves e navegação intuitiva
-
-  📋 COPIAR FÁCIL
-  Copie qualquer frase com um toque para usar onde quiser
-
-  ✅ GRÁTIS E SEM CADASTRO
-  Baixe e comece a usar imediatamente
-
-  🌍 SEMPRE ATUALIZADO
-  Novas frases adicionadas regularmente
-
-  Baixe agora e transforme seus dias com mensagens inspiradoras! 🚀
+  Daily inspiring quotes with categories, favorites, and sharing
   ```
 
-#### Recursos gráficos
-- Upload do ícone (512x512)
-- Upload do feature graphic (1024x500)
-- Upload dos screenshots
+- **Full description** (up to 4000 characters):
+  ```
+  Uplift - Your Daily Dose of Motivation
 
-### 3. Categorização
+  Receive inspiring quotes every day and transform your routine with positive messages!
 
-- **Categoria**: Estilo de vida
-- **Tags**: frases, motivação, inspiração, citações, quotes
+  MAIN FEATURES:
 
-### 4. Informações de Contato
+  VARIED CATEGORIES
+  • Motivation
+  • Success
+  • Love
+  • Life
+  • Wisdom
 
-- Email: [seu-email-de-contato]
-- Telefone (opcional)
-- Site (opcional)
+  FAVORITES
+  Save your favorite quotes and access them quickly
 
-### 5. Política de Privacidade
+  SHARE
+  Send quotes to friends via WhatsApp, Instagram, Facebook and more
 
-Você PRECISA de uma política de privacidade. Opções:
+  DAILY NOTIFICATIONS
+  Receive a motivational quote every day at your preferred time
 
-**Opção A: Gerador Online Grátis**
+  QUOTE OF THE DAY
+  Special highlight with the best quote of the day
+
+  DARK MODE
+  Modern interface with automatic light and dark theme
+
+  ELEGANT INTERFACE
+  Modern design with Material Design 3, smooth animations and intuitive navigation
+
+  EASY COPY
+  Copy any quote with one tap to use wherever you want
+
+  FREE WITH NO REGISTRATION
+  Download and start using immediately
+
+  ALWAYS UPDATED
+  New quotes added regularly
+
+  Download now and transform your days with inspiring messages!
+  ```
+
+#### Graphic Resources
+- Upload icon (512x512)
+- Upload feature graphic (1024x500)
+- Upload screenshots
+
+### 3. Categorization
+
+- **Category**: Lifestyle
+- **Tags**: quotes, motivation, inspiration, citations
+
+### 4. Contact Information
+
+- Email: [your-contact-email]
+- Phone (optional)
+- Website (optional)
+
+### 5. Privacy Policy
+
+You NEED a privacy policy. Options:
+
+**Option A: Free Online Generator**
 - https://www.privacypolicygenerator.info/
 - https://app-privacy-policy-generator.firebaseapp.com/
 
-**Opção B: Template Básico**
+**Option B: Basic Template**
 
-Hospede no GitHub Pages ou em qualquer servidor e use a URL.
+Host on GitHub Pages or any server and use the URL.
 
-### 6. Classificação de Conteúdo
+### 6. Content Rating
 
-Responda ao questionário:
-- **Violência**: Não
-- **Conteúdo sexual**: Não
-- **Linguagem obscena**: Não
-- **Uso de drogas**: Não
-- **Outros**: Não
+Answer the questionnaire:
+- **Violence**: No
+- **Sexual content**: No
+- **Obscene language**: No
+- **Drug use**: No
+- **Other**: No
 
-Classificação esperada: **Livre (L)** ou **Todos os públicos**
+Expected rating: **Everyone** or **All ages**
 
-### 7. Público-Alvo
+### 7. Target Audience
 
-- **Faixa etária**: Todos os públicos (ou 13+)
-- **Países**: Brasil (ou mundial)
+- **Age range**: Everyone (or 13+)
+- **Countries**: United States (or worldwide)
 
-### 8. Preços e Distribuição
+### 8. Pricing and Distribution
 
-- **Preço**: Grátis
-- **Países**: Selecione países desejados
-- **Contém anúncios**: ✅ Sim (AdMob)
-- **Compras no app**: ❌ Não
+- **Price**: Free
+- **Countries**: Select desired countries
+- **Contains ads**: Yes (AdMob)
+- **In-app purchases**: No
 
-### 9. Conteúdo do App
+### 9. App Content
 
-#### Upload do AAB
-1. Produção > Criar nova versão
-2. Upload do arquivo: `app-release.aab`
-3. Nome da versão: 1.0.0
-4. Notas da versão:
+#### Upload the AAB
+1. Production > Create new release
+2. Upload file: `app-release.aab`
+3. Release name: 1.0.0
+4. Release notes:
    ```
-   🎉 Lançamento inicial!
+   Initial launch!
 
-   ✨ Interface moderna e elegante
-   📚 Categorias de frases
-   ⭐ Sistema de favoritos
-   📤 Compartilhamento social
-   🔔 Notificações diárias
-   🌙 Modo escuro
+   Modern and elegant interface
+   Quote categories
+   Favorites system
+   Social sharing
+   Daily notifications
+   Dark mode
    ```
 
-### 10. Revisar e Publicar
+### 10. Review and Publish
 
-1. Complete todos os itens obrigatórios
-2. Clique em "Revisar versão"
-3. Verifique se não há erros
-4. Clique em "Iniciar implantação para produção"
+1. Complete all required items
+2. Click "Review release"
+3. Check for no errors
+4. Click "Start rollout to production"
 
-## ⏱️ Tempo de Análise
+## Review Time
 
-- **Primeira versão**: 3-7 dias
-- **Atualizações**: 1-3 dias
+- **First version**: 3-7 days
+- **Updates**: 1-3 days
 
-## 📊 Após a Publicação
+## After Publication
 
-### 1. Monitorar
-- Crashes no Firebase Crashlytics
-- Estatísticas no Play Console
-- Receita do AdMob
+### 1. Monitor
+- Crashes in Firebase Crashlytics
+- Statistics in Play Console
+- AdMob revenue
 
-### 2. Responder Avaliações
-- Responda feedback dos usuários
-- Corrija bugs reportados
+### 2. Respond to Reviews
+- Reply to user feedback
+- Fix reported bugs
 
-### 3. Atualizar Regularmente
-- Adicione novas frases
-- Corrija bugs
-- Adicione novos recursos
+### 3. Update Regularly
+- Add new quotes
+- Fix bugs
+- Add new features
 
-## 💰 Monetização com AdMob
+## Monetization with AdMob
 
-### Configurar AdMob
+### Configure AdMob
 
-1. **Criar conta**: https://admob.google.com/
-2. **Criar app** no AdMob
-3. **Criar unidades de anúncio**:
+1. **Create account**: https://admob.google.com/
+2. **Create app** in AdMob
+3. **Create ad units**:
    - Banner (320x50)
-   - Intersticial (tela cheia)
-4. **Copiar IDs** e colar em `strings.xml`
+   - Interstitial (full screen)
+4. **Copy IDs** and paste in `strings.xml`
 
-### Otimizar Receita
+### Optimize Revenue
 
-- **Ativar Mediação**: Maximize CPM com múltiplas redes
-- **Testar Posicionamento**: Não exagere nos anúncios
-- **Analisar Métricas**: eCPM, fill rate, CTR
+- **Enable Mediation**: Maximize CPM with multiple networks
+- **Test Placement**: Don't overdo ads
+- **Analyze Metrics**: eCPM, fill rate, CTR
 
-## 🐛 Solução de Problemas Comuns
+## Common Issues
 
-### App rejeitado por violação de política
-- Verifique política de privacidade
-- Verifique permissões solicitadas
-- Verifique conteúdo das frases
+### App rejected for policy violation
+- Check privacy policy
+- Check requested permissions
+- Check quote content
 
-### AAB não é aceito
-- Verifique assinatura digital
-- Verifique versionCode único
-- Limpe projeto e recompile
+### AAB not accepted
+- Check digital signature
+- Check unique versionCode
+- Clean project and recompile
 
-### Anúncios não aparecem
-- Aguarde até 24h após ativar IDs
-- Verifique IDs copiados corretamente
-- Teste com IDs de teste primeiro
+### Ads not appearing
+- Wait up to 24h after enabling IDs
+- Check IDs were copied correctly
+- Test with AdMob test IDs first
 
-## ✅ Checklist Final
+## Final Checklist
 
-- [ ] IDs do AdMob atualizados
-- [ ] Firebase configurado
-- [ ] Keystore criado e guardado
-- [ ] AAB gerado e testado
-- [ ] Ícone 512x512 criado
-- [ ] Feature graphic 1024x500 criado
-- [ ] Screenshots tirados (mín 2)
-- [ ] Descrições escritas
-- [ ] Política de privacidade criada
-- [ ] Conta Play Console criada
-- [ ] Taxa de $25 paga
-- [ ] App criado no console
-- [ ] Classificação preenchida
-- [ ] AAB enviado
-- [ ] Versão revisada e enviada
+- [ ] AdMob IDs updated
+- [ ] Firebase configured
+- [ ] Keystore created and stored
+- [ ] AAB generated and tested
+- [ ] 512x512 icon created
+- [ ] Feature graphic 1024x500 created
+- [ ] Screenshots taken (min 2)
+- [ ] Descriptions written
+- [ ] Privacy policy created
+- [ ] Play Console account created
+- [ ] $25 fee paid
+- [ ] App created in console
+- [ ] Rating filled in
+- [ ] AAB submitted
+- [ ] Release reviewed and submitted
 
-## 🎉 Parabéns!
+## Congratulations!
 
-Agora é só aguardar a aprovação do Google. Boa sorte! 🚀
+Now just wait for Google's approval. Good luck!
 
 ---
 
-**Dúvidas?** Consulte a documentação oficial: https://developer.android.com/distribute
+**Questions?** Check the official documentation: https://developer.android.com/distribute

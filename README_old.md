@@ -1,42 +1,42 @@
-# 📱 Frases Motivacionais - App Android
+# Motivational Quotes - Android App
 
-App Android de frases motivacionais com Firebase e monetização via AdMob.
+Android app for motivational quotes with Firebase and AdMob monetization.
 
-## ✨ Funcionalidades
+## Features
 
-- ✅ Lista de frases motivacionais organizadas por categorias
-- ⭐ Sistema de favoritos
-- 🔄 Compartilhamento social
-- 📊 Firebase Firestore (database em nuvem)
-- 💰 Monetização com AdMob (banners + anúncios intersticiais)
-- 🔔 Notificações diárias automáticas
-- 📱 Interface moderna com Material Design
+- List of motivational quotes organized by category
+- Favorites system
+- Social sharing
+- Firebase Firestore (cloud database)
+- AdMob monetization (banners + interstitial ads)
+- Automatic daily notifications
+- Modern Material Design interface
 
-## 🚀 Como Configurar
+## Setup
 
-### 1. Configurar Firebase
+### 1. Configure Firebase
 
-1. Acesse o [Firebase Console](https://console.firebase.google.com/)
-2. Clique em "Adicionar projeto" e siga os passos
-3. Após criar o projeto, clique em "Adicionar app" e selecione Android
-4. Preencha os dados:
-   - **Nome do pacote**: `com.motivacional.frases`
-   - **Apelido do app**: Frases Motivacionais
-   - **SHA-1**: (opcional para este projeto)
-5. Baixe o arquivo `google-services.json`
-6. **IMPORTANTE**: Copie o arquivo `google-services.json` para a pasta `app/` do projeto
+1. Go to the [Firebase Console](https://console.firebase.google.com/)
+2. Click "Add project" and follow the steps
+3. After creating the project, click "Add app" and select Android
+4. Fill in the details:
+   - **Package name**: `com.motivacional.frases`
+   - **App nickname**: Motivational Quotes
+   - **SHA-1**: (optional for this project)
+5. Download the `google-services.json` file
+6. **IMPORTANT**: Copy `google-services.json` into the `app/` folder of the project
 
-### 2. Ativar Serviços do Firebase
+### 2. Enable Firebase Services
 
-No Firebase Console:
+In the Firebase Console:
 
 1. **Firestore Database**:
-   - No menu lateral, vá em "Firestore Database"
-   - Clique em "Criar banco de dados"
-   - Escolha o modo de "Produção"
-   - Selecione a localização (southamerica-east1 para Brasil)
+   - In the left menu, go to "Firestore Database"
+   - Click "Create database"
+   - Choose "Production" mode
+   - Select location (southamerica-east1 for Brazil)
 
-2. **Regras de Segurança do Firestore**:
+2. **Firestore Security Rules**:
    ```
    rules_version = '2';
    service cloud.firestore {
@@ -48,132 +48,132 @@ No Firebase Console:
      }
    }
    ```
-   (Permite leitura pública, escrita apenas via console)
+   (Allows public reads, writes only via console)
 
-3. **Cloud Messaging** (para notificações):
-   - Já está ativado por padrão ao criar o projeto
+3. **Cloud Messaging** (for notifications):
+   - Already enabled by default when you create the project
 
-### 3. Configurar AdMob
+### 3. Configure AdMob
 
-1. Acesse o [AdMob Console](https://apps.admob.com/)
-2. Clique em "Apps" > "Adicionar app"
-3. Preencha:
-   - **Nome do app**: Frases Motivacionais
-   - **Plataforma**: Android
-4. Anote o **ID do app** que será gerado
-5. Crie dois blocos de anúncios:
-   - **Banner**: para o rodapé da tela
-   - **Intersticial**: para exibir entre ações
+1. Go to the [AdMob Console](https://apps.admob.com/)
+2. Click "Apps" > "Add app"
+3. Fill in:
+   - **App name**: Motivational Quotes
+   - **Platform**: Android
+4. Note the **App ID** that will be generated
+5. Create two ad units:
+   - **Banner**: for the bottom of the screen
+   - **Interstitial**: to show between user actions
 
-6. **Substituir IDs de teste por IDs reais**:
+6. **Replace test IDs with real IDs**:
 
-   Em `app/src/main/AndroidManifest.xml`:
+   In `app/src/main/AndroidManifest.xml`:
    ```xml
    <meta-data
        android:name="com.google.android.gms.ads.APPLICATION_ID"
-       android:value="SEU_ID_DO_APP_ADMOB"/>
+       android:value="YOUR_ADMOB_APP_ID"/>
    ```
 
-   Em `app/src/main/res/values/strings.xml`:
+   In `app/src/main/res/values/strings.xml`:
    ```xml
-   <string name="banner_ad_unit_id">SEU_ID_BANNER</string>
-   <string name="interstitial_ad_unit_id">SEU_ID_INTERSTICIAL</string>
+   <string name="banner_ad_unit_id">YOUR_BANNER_ID</string>
+   <string name="interstitial_ad_unit_id">YOUR_INTERSTITIAL_ID</string>
    ```
 
-### 4. Popular Database com Frases
+### 4. Seed the Database with Quotes
 
-Após configurar tudo:
+After setting everything up:
 
-1. Abra o app
-2. No menu superior (três pontos), clique em "Inicializar Database"
-3. Isso vai adicionar 10 frases iniciais ao Firestore
+1. Open the app
+2. In the top menu (three dots), click "Initialize Database"
+3. This will add 10 initial quotes to Firestore
 
-### 5. Adicionar Mais Frases
+### 5. Add More Quotes
 
-Você pode adicionar frases diretamente no Firebase Console:
+You can add quotes directly in the Firebase Console:
 
-1. Acesse Firestore Database
-2. Clique em "Adicionar coleção"
-3. Nome da coleção: `quotes`
-4. Adicione documentos com os campos:
-   - `text` (string): Texto da frase
-   - `author` (string): Autor
-   - `category` (string): motivation, success, love, life ou wisdom
-   - `timestamp` (number): Timestamp atual
+1. Go to Firestore Database
+2. Click "Add collection"
+3. Collection name: `quotes`
+4. Add documents with the fields:
+   - `text` (string): Quote text
+   - `author` (string): Author
+   - `category` (string): motivation, success, love, life, or wisdom
+   - `timestamp` (number): Current timestamp
 
-## 📂 Estrutura do Projeto
+## Project Structure
 
 ```
 app/
 ├── data/
-│   ├── model/          # Modelos de dados (Quote, Category)
-│   └── repository/     # QuoteRepository (comunicação com Firebase)
+│   ├── model/          # Data models (Quote, Category)
+│   └── repository/     # QuoteRepository (Firebase communication)
 ├── ui/
 │   ├── adapters/       # QuoteAdapter (RecyclerView)
-│   ├── viewmodel/      # QuoteViewModel (lógica de negócio)
-│   └── MainActivity    # Tela principal
+│   ├── viewmodel/      # QuoteViewModel (business logic)
+│   └── MainActivity    # Main screen
 ├── services/           # Firebase Messaging Service
-└── utils/              # Helpers (AdMob, Favoritos, Notificações)
+└── utils/              # Helpers (AdMob, Favorites, Notifications)
 ```
 
-## 💰 Estratégia de Monetização
+## Monetization Strategy
 
-### Anúncios Banner
-- Exibido permanentemente no rodapé da tela
-- Menor CPM, mas sempre visível
+### Banner Ads
+- Permanently displayed at the bottom of the screen
+- Lower CPM, but always visible
 
-### Anúncios Intersticiais
-- Exibido a cada 5 ações do usuário:
-  - Favoritar uma frase
-  - Compartilhar uma frase
-- Maior CPM, mas menos frequente
+### Interstitial Ads
+- Shown every 5 user actions:
+  - Favoriting a quote
+  - Sharing a quote
+- Higher CPM, but less frequent
 
-### Dicas para Maximizar Receita
+### Tips for Maximizing Revenue
 
-1. **Publique no Google Play**
-2. **Promova o app**:
-   - Redes sociais (Instagram, TikTok, Facebook)
-   - Grupos de WhatsApp/Telegram
-   - Crie conteúdo sobre motivação
-3. **Atualize regularmente**:
-   - Adicione novas frases semanalmente
-   - Mantenha o conteúdo fresco
-4. **Engajamento**:
-   - Incentive compartilhamento
-   - Use notificações diárias (mas sem exagero)
-5. **Otimize para ASO** (App Store Optimization):
-   - Título descritivo
-   - Palavras-chave: frases, motivação, inspiração
-   - Screenshots atraentes
+1. **Publish on Google Play**
+2. **Promote the app**:
+   - Social media (Instagram, TikTok, Facebook)
+   - WhatsApp/Telegram groups
+   - Create motivational content
+3. **Update regularly**:
+   - Add new quotes weekly
+   - Keep content fresh
+4. **Engagement**:
+   - Encourage sharing
+   - Use daily notifications (but don't overdo it)
+5. **Optimize for ASO** (App Store Optimization):
+   - Descriptive title
+   - Keywords: quotes, motivation, inspiration
+   - Attractive screenshots
 
-## 🔧 Compilar e Executar
+## Build and Run
 
-1. Abra o projeto no Android Studio
-2. Aguarde o Gradle sincronizar
-3. Conecte um dispositivo Android ou use emulador
-4. Clique em Run (▶️)
+1. Open the project in Android Studio
+2. Wait for Gradle to sync
+3. Connect an Android device or use an emulator
+4. Click Run (▶)
 
-## 📊 Próximas Funcionalidades (Ideias)
+## Planned Features
 
-- [ ] Widget para tela inicial
-- [ ] Modo escuro
-- [ ] Busca de frases
-- [ ] Categorias personalizadas
-- [ ] Login com Google (salvar favoritos na nuvem)
-- [ ] Compartilhamento como imagem
-- [ ] Estatísticas de uso
+- [ ] Home screen widget
+- [ ] Dark mode
+- [ ] Quote search
+- [ ] Custom categories
+- [ ] Google login (save favorites to the cloud)
+- [ ] Share as image
+- [ ] Usage statistics
 
-## 📝 Notas Importantes
+## Important Notes
 
-- **Teste os anúncios**: Use os IDs de teste durante desenvolvimento
-- **Políticas do AdMob**: Nunca clique nos próprios anúncios
-- **Conteúdo**: Adicione frases originais e de domínio público
-- **Privacidade**: Adicione política de privacidade antes de publicar
+- **Test ads**: Use test IDs during development
+- **AdMob policies**: Never click on your own ads
+- **Content**: Add original quotes and public domain quotes
+- **Privacy**: Add a privacy policy before publishing
 
-## 📄 Licença
+## License
 
-Este projeto é livre para uso pessoal e comercial.
+This project is free for personal and commercial use.
 
 ---
 
-**Desenvolvido com Claude Code** 🤖
+**Built with Claude Code**

@@ -1,185 +1,185 @@
-# 🚀 COMECE AQUI - Uplift App
+# START HERE - Uplift App
 
-## ✅ Status Atual do Projeto
+## Current Project Status
 
-### O que JÁ está pronto:
-- ✅ App Android completo (Uplift)
-- ✅ Código 100% funcional
-- ✅ Firebase configurado por você
-- ✅ google-services.json no lugar certo
-- ✅ Frases adicionadas no Firestore
-- ✅ Sistema de monetização (AdMob) implementado
-- ✅ Sistema de favoritos
-- ✅ Compartilhamento social
-- ✅ Notificações diárias
+### What is ALREADY done:
+- Android app complete (Uplift)
+- Code 100% functional
+- Firebase configured
+- google-services.json in the right place
+- Quotes added to Firestore
+- Monetization system (AdMob) implemented
+- Favorites system
+- Social sharing
+- Daily notifications
 
 ---
 
-## 📍 Você está aqui: PRONTO PARA COMPILAR
+## You are here: READY TO BUILD
 
-### Próximos 3 Passos:
+### Next 3 Steps:
 
-## 1️⃣ COMPILAR O APP
+## 1. BUILD THE APP
 
-**Você escolhe:**
+**Your options:**
 
-### Opção A: Contratar Alguém ($10-30) ⭐ RECOMENDADO
-- Mais rápido (1-2 dias)
-- Sem complicação
-- **Leia:** `COMPILAR_SEM_ANDROID_STUDIO.md`
+### Option A: Hire Someone ($10-30) — RECOMMENDED
+- Faster (1-2 days)
+- No hassle
+- **Read:** `COMPILAR_SEM_ANDROID_STUDIO.md`
 
-### Opção B: Pedir Ajuda
-- Amigo com Android Studio
-- Gratuito
-- **Leia:** `COMPILAR_SEM_ANDROID_STUDIO.md`
+### Option B: Ask for Help
+- A friend with Android Studio
+- Free
+- **Read:** `COMPILAR_SEM_ANDROID_STUDIO.md`
 
-### Opção C: Serviço Online (Grátis, técnico)
+### Option C: Online Service (Free, technical)
 - GitHub + Codemagic
-- Precisa saber usar Git
-- **Leia:** `COMPILAR_SEM_ANDROID_STUDIO.md`
+- Requires knowing how to use Git
+- **Read:** `COMPILAR_SEM_ANDROID_STUDIO.md`
 
 ---
 
-## 2️⃣ TESTAR NO CELULAR
+## 2. TEST ON YOUR PHONE
 
-1. Receba o arquivo `.apk`
-2. Ative "Fontes desconhecidas" no celular
-3. Instale o APK
-4. Abra o app
-5. Veja se as frases aparecem
-6. Teste favoritar e compartilhar
+1. Receive the `.apk` file
+2. Enable "Unknown sources" on your phone
+3. Install the APK
+4. Open the app
+5. Check that quotes appear
+6. Test favoriting and sharing
 
 ---
 
-## 3️⃣ MONETIZAR E PUBLICAR
+## 3. MONETIZE AND PUBLISH
 
-1. **Criar conta AdMob**
+1. **Create AdMob account**
    - https://admob.google.com/
-   - Criar 2 blocos de anúncios
+   - Create 2 ad units
 
-2. **Substituir IDs de teste por IDs reais**
-   - Em `strings.xml`
-   - Em `AndroidManifest.xml`
+2. **Replace test IDs with real IDs**
+   - In `strings.xml`
+   - In `AndroidManifest.xml`
 
-3. **Recompilar com IDs reais**
+3. **Rebuild with real IDs**
 
-4. **Publicar na Play Store**
-   - **Leia:** `PUBLICAR.md`
-
----
-
-## 📚 Guias Disponíveis
-
-| Arquivo | Quando Usar |
-|---------|-------------|
-| **GUIA_FIREBASE.md** | ✅ JÁ FEZ (Firebase configurado) |
-| **COMPILAR_SEM_ANDROID_STUDIO.md** | ➡️ LER AGORA |
-| **PUBLICAR.md** | Depois de compilar e testar |
-| **README.md** | Visão geral do projeto |
+4. **Publish on Play Store**
+   - **Read:** `PUBLICAR.md`
 
 ---
 
-## 🎯 Sua Missão Agora
+## Available Guides
 
-1. Abra: `COMPILAR_SEM_ANDROID_STUDIO.md`
-2. Escolha uma das 3 opções
-3. Compile o app
-4. Teste no celular
-
----
-
-## 💰 Potencial de Ganhos
-
-Com AdMob configurado:
-
-| Usuários Ativos/Dia | Receita Estimada/Mês |
-|---------------------|----------------------|
-| 100 usuários | $5 - $15 |
-| 500 usuários | $25 - $75 |
-| 1.000 usuários | $50 - $150 |
-| 5.000 usuários | $250 - $750 |
-| 10.000 usuários | $500 - $1.500 |
-
-**Para conseguir usuários:**
-- Publicar na Play Store
-- Divulgar nas redes sociais
-- Grupos de WhatsApp
-- Pedir avaliações
+| File | When to Use |
+|------|-------------|
+| **GUIA_FIREBASE.md** | Already done (Firebase configured) |
+| **COMPILAR_SEM_ANDROID_STUDIO.md** | Read now |
+| **PUBLICAR.md** | After building and testing |
+| **README.md** | Project overview |
 
 ---
 
-## 📋 Checklist Completo
+## Your Mission Now
 
-### Fase 1: Desenvolvimento ✅
-- ✅ Projeto criado
-- ✅ Firebase configurado
-- ✅ Frases adicionadas
-- ✅ google-services.json no lugar
-
-### Fase 2: Compilação (VOCÊ ESTÁ AQUI)
-- ⬜ Escolher método de compilação
-- ⬜ Compilar APK
-- ⬜ Testar no celular
-
-### Fase 3: Monetização
-- ⬜ Criar conta AdMob
-- ⬜ Gerar IDs de anúncios
-- ⬜ Substituir IDs de teste
-- ⬜ Recompilar
-
-### Fase 4: Publicação
-- ⬜ Criar conta Google Play ($25)
-- ⬜ Preparar assets (ícone, screenshots)
-- ⬜ Escrever descrição
-- ⬜ Fazer upload AAB
-- ⬜ Enviar para revisão
-
-### Fase 5: Marketing
-- ⬜ Divulgar nas redes
-- ⬜ Pedir avaliações
-- ⬜ Adicionar mais frases
-- ⬜ Responder comentários
+1. Open: `COMPILAR_SEM_ANDROID_STUDIO.md`
+2. Choose one of the 3 options
+3. Build the app
+4. Test on your phone
 
 ---
 
-## 🆘 Precisa de Ajuda?
+## Earnings Potential
 
-### Compilação
-- Leia `COMPILAR_SEM_ANDROID_STUDIO.md`
-- Fiverr.com (contratar freelancer)
+With AdMob configured:
 
-### Firebase/Banco de Dados
-- Releia `GUIA_FIREBASE.md`
+| Active Users/Day | Estimated Revenue/Month |
+|------------------|------------------------|
+| 100 users | $5 - $15 |
+| 500 users | $25 - $75 |
+| 1,000 users | $50 - $150 |
+| 5,000 users | $250 - $750 |
+| 10,000 users | $500 - $1,500 |
+
+**To get users:**
+- Publish on Play Store
+- Promote on social media
+- WhatsApp groups
+- Ask for reviews
+
+---
+
+## Full Checklist
+
+### Phase 1: Development
+- Project created
+- Firebase configured
+- Quotes added
+- google-services.json in place
+
+### Phase 2: Build (YOU ARE HERE)
+- Choose build method
+- Build APK
+- Test on phone
+
+### Phase 3: Monetization
+- Create AdMob account
+- Generate ad IDs
+- Replace test IDs
+- Rebuild
+
+### Phase 4: Publishing
+- Create Google Play account ($25)
+- Prepare assets (icon, screenshots)
+- Write description
+- Upload AAB
+- Submit for review
+
+### Phase 5: Marketing
+- Promote on social media
+- Ask for reviews
+- Add more quotes
+- Reply to comments
+
+---
+
+## Need Help?
+
+### Building
+- Read `COMPILAR_SEM_ANDROID_STUDIO.md`
+- Fiverr.com (hire a freelancer)
+
+### Firebase/Database
+- Re-read `GUIA_FIREBASE.md`
 - Firebase Console: console.firebase.google.com
 
-### Publicação
-- Leia `PUBLICAR.md`
+### Publishing
+- Read `PUBLICAR.md`
 - Google Play Console: play.google.com/console
 
 ---
 
-## 🎉 Parabéns!
+## Congratulations!
 
-Você já tem:
-- ✅ App profissional completo
-- ✅ Backend em nuvem (Firebase)
-- ✅ Sistema de monetização
-- ✅ Tudo pronto para compilar
+You already have:
+- A complete professional app
+- Cloud backend (Firebase)
+- Monetization system
+- Everything ready to build
 
-**Agora é só compilar, testar e publicar!**
+**Now just build, test, and publish!**
 
 ---
 
-## ⚡ Ação Rápida
+## Quick Action
 
-**AGORA:**
-1. Abra `COMPILAR_SEM_ANDROID_STUDIO.md`
-2. Escolha: Fiverr, Amigo ou Serviço Online
-3. Compile o app
+**NOW:**
+1. Open `COMPILAR_SEM_ANDROID_STUDIO.md`
+2. Choose: Fiverr, Friend, or Online Service
+3. Build the app
 
-**DEPOIS:**
-1. Teste no celular
+**THEN:**
+1. Test on your phone
 2. Configure AdMob
-3. Publique na Play Store
+3. Publish on Play Store
 
-**BOA SORTE!** 🚀💰
+**GOOD LUCK!**

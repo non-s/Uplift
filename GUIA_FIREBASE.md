@@ -1,121 +1,121 @@
-# 🔥 Guia Completo: Configurar Firebase para o Uplift
+# Complete Guide: Set Up Firebase for Uplift
 
-Este guia vai te ensinar a configurar o Firebase do ZERO, mesmo sem saber programar.
+This guide will walk you through configuring Firebase from scratch, even without programming experience.
 
-## ⏱️ Tempo Estimado: 15-20 minutos
-
----
-
-## 📋 O que você vai fazer:
-
-1. Criar conta no Firebase (2 min)
-2. Criar projeto (3 min)
-3. Adicionar app Android (5 min)
-4. Configurar Firestore (5 min)
-5. Adicionar frases ao banco de dados (10 min)
+## Estimated Time: 15-20 minutes
 
 ---
 
-## 🎯 PARTE 1: Criar Conta e Projeto Firebase
+## What you will do:
 
-### Passo 1: Acessar Firebase Console
-
-1. Abra seu navegador
-2. Acesse: **https://console.firebase.google.com/**
-3. Faça login com sua conta Google
-4. Se for primeira vez, aceite os termos
-
-### Passo 2: Criar Novo Projeto
-
-1. Clique no botão **"Adicionar projeto"** (ou "Create a project")
-
-2. **Tela 1 - Nome do Projeto:**
-   - Nome: `uplift-app` (ou qualquer nome)
-   - Clique em **"Continuar"**
-
-3. **Tela 2 - Google Analytics:**
-   - Deixe **ATIVADO** (recomendado)
-   - Clique em **"Continuar"**
-
-4. **Tela 3 - Conta do Analytics:**
-   - Selecione "Default Account for Firebase"
-   - Aceite os termos
-   - Clique em **"Criar projeto"**
-
-5. **Aguarde** 30-60 segundos enquanto o projeto é criado
-
-6. Clique em **"Continuar"** quando aparecer "Seu projeto está pronto"
+1. Create a Firebase account (2 min)
+2. Create a project (3 min)
+3. Add the Android app (5 min)
+4. Configure Firestore (5 min)
+5. Add quotes to the database (10 min)
 
 ---
 
-## 📱 PARTE 2: Adicionar App Android ao Projeto
+## PART 1: Create Account and Firebase Project
 
-### Passo 3: Registrar App Android
+### Step 1: Access Firebase Console
 
-1. Na tela inicial do projeto, clique no ícone **Android**
-   - Ou vá em **Visão geral do projeto** → **Adicionar app** → **Android**
+1. Open your browser
+2. Go to: **https://console.firebase.google.com/**
+3. Sign in with your Google account
+4. If first time, accept the terms
 
-2. **Preencha os campos:**
+### Step 2: Create New Project
 
-   **Nome do pacote Android (OBRIGATÓRIO):**
+1. Click the **"Add project"** button (or "Create a project")
+
+2. **Screen 1 - Project Name:**
+   - Name: `uplift-app` (or any name)
+   - Click **"Continue"**
+
+3. **Screen 2 - Google Analytics:**
+   - Leave **ENABLED** (recommended)
+   - Click **"Continue"**
+
+4. **Screen 3 - Analytics Account:**
+   - Select "Default Account for Firebase"
+   - Accept the terms
+   - Click **"Create project"**
+
+5. **Wait** 30-60 seconds while the project is created
+
+6. Click **"Continue"** when "Your project is ready" appears
+
+---
+
+## PART 2: Add Android App to the Project
+
+### Step 3: Register the Android App
+
+1. On the project home screen, click the **Android** icon
+   - Or go to **Project Overview** → **Add app** → **Android**
+
+2. **Fill in the fields:**
+
+   **Android package name (REQUIRED):**
    ```
    com.motivacional.frases
    ```
-   ⚠️ **IMPORTANTE**: Copie exatamente como está acima!
+   **IMPORTANT**: Copy exactly as shown above!
 
-   **Apelido do app (opcional):**
+   **App nickname (optional):**
    ```
    Uplift
    ```
 
-   **Certificado de assinatura SHA-1 (opcional):**
-   - Deixe em branco por enquanto
-   - Não é necessário para este projeto
+   **SHA-1 signing certificate (optional):**
+   - Leave blank for now
+   - Not required for this project
 
-3. Clique em **"Registrar app"**
+3. Click **"Register app"**
 
-### Passo 4: Baixar google-services.json
+### Step 4: Download google-services.json
 
-1. Na próxima tela, clique em **"Fazer download de google-services.json"**
+1. On the next screen, click **"Download google-services.json"**
 
-2. **Salve o arquivo** em um local seguro (ex: Downloads)
+2. **Save the file** in a safe place (e.g., Downloads)
 
-3. **IMPORTANTE:** Você vai precisar desse arquivo depois!
-   - Se estiver usando serviço de compilação, você vai enviar esse arquivo
-   - Se contratar alguém, vai enviar esse arquivo
+3. **IMPORTANT:** You will need this file later!
+   - If using a build service, you will upload this file
+   - If hiring someone, you will send this file along
 
-4. Clique em **"Próxima"**
+4. Click **"Next"**
 
-5. Clique em **"Próxima"** novamente (ignore as instruções de código)
+5. Click **"Next"** again (ignore the code instructions)
 
-6. Clique em **"Continuar no console"**
+6. Click **"Continue to console"**
 
 ---
 
-## ☁️ PARTE 3: Configurar Firestore Database
+## PART 3: Configure Firestore Database
 
-### Passo 5: Criar Database Firestore
+### Step 5: Create Firestore Database
 
-1. No menu lateral esquerdo, clique em **"Firestore Database"**
+1. In the left sidebar, click **"Firestore Database"**
 
-2. Clique no botão **"Criar banco de dados"**
+2. Click the **"Create database"** button
 
-3. **Tela 1 - Modo de Inicialização:**
-   - Selecione: **"Iniciar no modo de produção"**
-   - Clique em **"Próxima"**
+3. **Screen 1 - Initialization Mode:**
+   - Select: **"Start in production mode"**
+   - Click **"Next"**
 
-4. **Tela 2 - Local do Firestore:**
-   - Selecione: **"southamerica-east1 (São Paulo)"** (para Brasil)
-   - Ou escolha o mais próximo de você
-   - Clique em **"Ativar"**
+4. **Screen 2 - Firestore Location:**
+   - Select: **"southamerica-east1 (São Paulo)"** (for Brazil)
+   - Or choose the one closest to you
+   - Click **"Enable"**
 
-5. **Aguarde** 1-2 minutos enquanto o banco é criado
+5. **Wait** 1-2 minutes while the database is created
 
-### Passo 6: Configurar Regras de Segurança
+### Step 6: Configure Security Rules
 
-1. Após o database ser criado, clique na aba **"Regras"** (no topo)
+1. After the database is created, click the **"Rules"** tab (at the top)
 
-2. **Substitua** todo o conteúdo por este:
+2. **Replace** all content with this:
 
 ```javascript
 rules_version = '2';
@@ -129,287 +129,287 @@ service cloud.firestore {
 }
 ```
 
-3. Clique em **"Publicar"**
+3. Click **"Publish"**
 
-⚠️ **Nota:** Essa regra permite leitura e escrita para todos. Para produção, você deve restringir depois.
+**Note:** This rule allows read and write for everyone. For production, you should restrict it later.
 
 ---
 
-## 📝 PARTE 4: Adicionar Frases ao Firestore
+## PART 4: Add Quotes to Firestore
 
-### Passo 7: Criar Coleção
+### Step 7: Create Collection
 
-1. Volte para a aba **"Dados"**
+1. Go back to the **"Data"** tab
 
-2. Clique em **"Iniciar coleção"**
+2. Click **"Start collection"**
 
-3. **ID da coleção:**
+3. **Collection ID:**
    ```
    quotes
    ```
-   ⚠️ **IMPORTANTE**: Digite exatamente `quotes` (sem espaços)
+   **IMPORTANT**: Type exactly `quotes` (no spaces)
 
-4. Clique em **"Próxima"**
+4. Click **"Next"**
 
-### Passo 8: Adicionar Primeira Frase
+### Step 8: Add the First Quote
 
-Agora você vai adicionar a primeira frase. Preencha assim:
+Now you will add the first quote. Fill in as follows:
 
-**ID do documento:**
-- Clique em **"ID automático"** (deixe o Firebase gerar)
+**Document ID:**
+- Click **"Auto-ID"** (let Firebase generate it)
 
-**Campos** (clique em "Adicionar campo" para cada um):
+**Fields** (click "Add field" for each one):
 
-1. **Campo 1:**
-   - Nome do campo: `text`
-   - Tipo: `string`
-   - Valor: `O sucesso é a soma de pequenos esforços repetidos dia após dia.`
+1. **Field 1:**
+   - Field name: `text`
+   - Type: `string`
+   - Value: `Success is the sum of small efforts repeated day after day.`
 
-2. **Campo 2:**
-   - Nome do campo: `author`
-   - Tipo: `string`
-   - Valor: `Robert Collier`
+2. **Field 2:**
+   - Field name: `author`
+   - Type: `string`
+   - Value: `Robert Collier`
 
-3. **Campo 3:**
-   - Nome do campo: `category`
-   - Tipo: `string`
-   - Valor: `success`
+3. **Field 3:**
+   - Field name: `category`
+   - Type: `string`
+   - Value: `success`
 
-4. **Campo 4:**
-   - Nome do campo: `timestamp`
-   - Tipo: `number`
-   - Valor: `1700000000000`
+4. **Field 4:**
+   - Field name: `timestamp`
+   - Type: `number`
+   - Value: `1700000000000`
 
-Clique em **"Salvar"**
+Click **"Save"**
 
-🎉 Primeira frase adicionada!
+First quote added!
 
-### Passo 9: Adicionar Mais Frases
+### Step 9: Add More Quotes
 
-Repita o processo para adicionar mais frases. Aqui estão 9 frases prontas:
+Repeat the process to add more quotes. Here are 9 ready-made quotes:
 
 ---
 
-**FRASE 2:**
-- text: `Acredite em si mesmo e todo o resto se encaixará.`
+**QUOTE 2:**
+- text: `Believe in yourself and everything else will fall into place.`
 - author: `Unknown`
 - category: `motivation`
 - timestamp: `1700000001000`
 
 ---
 
-**FRASE 3:**
-- text: `A persistência é o caminho do êxito.`
+**QUOTE 3:**
+- text: `Persistence is the path to success.`
 - author: `Charles Chaplin`
 - category: `success`
 - timestamp: `1700000002000`
 
 ---
 
-**FRASE 4:**
-- text: `Você é mais forte do que pensa.`
+**QUOTE 4:**
+- text: `You are stronger than you think.`
 - author: `Unknown`
 - category: `motivation`
 - timestamp: `1700000003000`
 
 ---
 
-**FRASE 5:**
-- text: `O amor é a única força capaz de transformar um inimigo em amigo.`
+**QUOTE 5:**
+- text: `Love is the only force capable of turning an enemy into a friend.`
 - author: `Martin Luther King`
 - category: `love`
 - timestamp: `1700000004000`
 
 ---
 
-**FRASE 6:**
-- text: `A vida é 10% o que acontece com você e 90% como você reage a isso.`
+**QUOTE 6:**
+- text: `Life is 10% what happens to you and 90% how you react to it.`
 - author: `Charles Swindoll`
 - category: `life`
 - timestamp: `1700000005000`
 
 ---
 
-**FRASE 7:**
-- text: `Seja a mudança que você deseja ver no mundo.`
+**QUOTE 7:**
+- text: `Be the change you wish to see in the world.`
 - author: `Mahatma Gandhi`
 - category: `wisdom`
 - timestamp: `1700000006000`
 
 ---
 
-**FRASE 8:**
-- text: `O único modo de fazer um ótimo trabalho é amar o que você faz.`
+**QUOTE 8:**
+- text: `The only way to do great work is to love what you do.`
 - author: `Steve Jobs`
 - category: `success`
 - timestamp: `1700000007000`
 
 ---
 
-**FRASE 9:**
-- text: `Não conte os dias, faça os dias contarem.`
+**QUOTE 9:**
+- text: `Don't count the days, make the days count.`
 - author: `Muhammad Ali`
 - category: `motivation`
 - timestamp: `1700000008000`
 
 ---
 
-**FRASE 10:**
-- text: `Grandes coisas nunca vêm de zonas de conforto.`
+**QUOTE 10:**
+- text: `Great things never come from comfort zones.`
 - author: `Unknown`
 - category: `motivation`
 - timestamp: `1700000009000`
 
 ---
 
-### 💡 Dica Rápida
+### Quick Tip
 
-Para adicionar cada frase:
-1. Clique em **"Adicionar documento"** (botão no topo)
-2. Deixe ID automático
-3. Adicione os 4 campos (text, author, category, timestamp)
-4. Salve
-5. Repita
-
----
-
-## ✅ PARTE 5: Verificar Configuração
-
-### Passo 10: Testar se está funcionando
-
-1. No menu lateral, vá em **"Firestore Database"**
-
-2. Você deve ver:
-   - ✅ Coleção `quotes`
-   - ✅ Pelo menos 10 documentos dentro dela
-   - ✅ Cada documento com 4 campos
-
-3. Clique em um documento para verificar se todos os campos estão preenchidos
+To add each quote:
+1. Click **"Add document"** (button at the top)
+2. Leave ID as auto
+3. Add the 4 fields (text, author, category, timestamp)
+4. Save
+5. Repeat
 
 ---
 
-## 🎯 PARTE 6: Ativar Cloud Messaging (Notificações)
+## PART 5: Verify Configuration
 
-### Passo 11: Ativar FCM
+### Step 10: Test that it's working
 
-1. No menu lateral, clique no ícone de **engrenagem** → **Configurações do projeto**
+1. In the left menu, go to **"Firestore Database"**
 
-2. Vá na aba **"Cloud Messaging"**
+2. You should see:
+   - Collection `quotes`
+   - At least 10 documents inside it
+   - Each document with 4 fields
 
-3. Se pedir para ativar, clique em **"Ativar"**
-
-4. Pronto! As notificações já estão configuradas
-
----
-
-## 📋 Checklist Final
-
-Antes de continuar, verifique:
-
-- ✅ Projeto Firebase criado
-- ✅ App Android registrado com pacote `com.motivacional.frases`
-- ✅ Arquivo `google-services.json` baixado e salvo
-- ✅ Firestore Database criado
-- ✅ Regras de segurança configuradas
-- ✅ Coleção `quotes` criada
-- ✅ Pelo menos 10 frases adicionadas
-- ✅ Cloud Messaging ativado
+3. Click on a document to verify all fields are filled in
 
 ---
 
-## 🚀 Próximos Passos
+## PART 6: Enable Cloud Messaging (Notifications)
 
-Agora que o Firebase está configurado, você precisa:
+### Step 11: Enable FCM
 
-1. **Compilar o app** com o arquivo `google-services.json`
-   - Leia: `COMPILAR_SEM_ANDROID_STUDIO.md`
+1. In the left menu, click the **gear icon** → **Project settings**
 
-2. **Configurar AdMob** (para monetizar)
-   - Leia: seção AdMob no `PUBLICAR.md`
+2. Go to the **"Cloud Messaging"** tab
 
-3. **Testar o app** no celular
+3. If it asks to enable, click **"Enable"**
 
-4. **Publicar na Play Store**
+4. Done! Notifications are now configured
 
 ---
 
-## ⚠️ IMPORTANTE: Arquivo google-services.json
+## Final Checklist
 
-**O que fazer com esse arquivo:**
+Before continuing, verify:
 
-1. Se você for compilar:
-   - Coloque na pasta `app/` do projeto
-
-2. Se for contratar alguém para compilar:
-   - Envie esse arquivo junto com o código do projeto
-
-3. Se for usar serviço online:
-   - Faça upload desse arquivo quando pedir
-
-**Nunca:**
-- ❌ Compartilhe publicamente (GitHub, redes sociais)
-- ❌ Perca esse arquivo (faça backup)
+- Firebase project created
+- Android app registered with package `com.motivacional.frases`
+- `google-services.json` file downloaded and saved
+- Firestore Database created
+- Security rules configured
+- `quotes` collection created
+- At least 10 quotes added
+- Cloud Messaging enabled
 
 ---
 
-## 💡 Dicas Extras
+## Next Steps
 
-### Como Adicionar Mais Frases Depois
+Now that Firebase is configured, you need to:
 
-1. Acesse Firebase Console
-2. Vá em Firestore Database
-3. Clique em "Adicionar documento"
-4. Preencha os campos
-5. Salve
+1. **Build the app** with the `google-services.json` file
+   - Read: `COMPILAR_SEM_ANDROID_STUDIO.md`
 
-### Categorias Disponíveis
+2. **Configure AdMob** (to monetize)
+   - Read: AdMob section in `PUBLICAR.md`
 
-Use apenas estas categorias (são as configuradas no app):
-- `motivation` (Motivação)
-- `success` (Sucesso)
-- `love` (Amor)
-- `life` (Vida)
-- `wisdom` (Sabedoria)
+3. **Test the app** on your phone
 
-### Onde Encontrar Mais Frases
+4. **Publish on Play Store**
+
+---
+
+## IMPORTANT: The google-services.json File
+
+**What to do with this file:**
+
+1. If you are building yourself:
+   - Place it in the `app/` folder of the project
+
+2. If hiring someone to build:
+   - Send this file along with the project code
+
+3. If using an online service:
+   - Upload this file when prompted
+
+**Never:**
+- Share publicly (GitHub, social media)
+- Lose this file (make a backup)
+
+---
+
+## Extra Tips
+
+### How to Add More Quotes Later
+
+1. Access Firebase Console
+2. Go to Firestore Database
+3. Click "Add document"
+4. Fill in the fields
+5. Save
+
+### Available Categories
+
+Use only these categories (they are configured in the app):
+- `motivation`
+- `success`
+- `love`
+- `life`
+- `wisdom`
+
+### Where to Find More Quotes
 
 - BrainyQuote.com
 - GoodReads.com
-- Pinterest (busque "motivational quotes")
-- Instagram (páginas de motivação)
+- Pinterest (search "motivational quotes")
+- Instagram (motivation pages)
 
-⚠️ **Atenção aos direitos autorais**: Use frases de domínio público ou de autores clássicos
-
----
-
-## 🆘 Problemas Comuns
-
-### "Não encontro o botão Android"
-- Certifique-se de estar na página inicial do projeto
-- Procure por "Adicionar app" ou o ícone Android
-
-### "Erro ao criar coleção"
-- Verifique se digitou `quotes` exatamente (minúsculas, sem espaço)
-- Tente em um navegador diferente
-
-### "Não sei preencher os campos"
-- Campo `text`: a frase em si (string)
-- Campo `author`: nome do autor (string)
-- Campo `category`: uma das 5 categorias (string)
-- Campo `timestamp`: número grande, ex: 1700000000000 (number)
-
-### "Perdi o google-services.json"
-- Vá em Configurações do Projeto → Seus apps
-- Clique nos 3 pontos no app Android → Baixar google-services.json
+**Note on copyrights**: Use public domain quotes or quotes from classic authors
 
 ---
 
-## ✅ Configuração Completa!
+## Common Issues
 
-Parabéns! Seu Firebase está 100% configurado.
+### "Can't find the Android button"
+- Make sure you are on the project home page
+- Look for "Add app" or the Android icon
 
-**Próximo passo:** Abra o arquivo `COMPILAR_SEM_ANDROID_STUDIO.md` para ver como compilar o app.
+### "Error creating collection"
+- Make sure you typed `quotes` exactly (lowercase, no spaces)
+- Try a different browser
+
+### "Don't know how to fill in the fields"
+- `text` field: the quote itself (string)
+- `author` field: author's name (string)
+- `category` field: one of the 5 categories (string)
+- `timestamp` field: large number, e.g. 1700000000000 (number)
+
+### "Lost the google-services.json"
+- Go to Project Settings → Your apps
+- Click the 3 dots on the Android app → Download google-services.json
 
 ---
 
-**Dúvidas?** Releia este guia com calma, cada passo é importante!
+## Configuration Complete!
+
+Your Firebase is 100% configured.
+
+**Next step:** Open `COMPILAR_SEM_ANDROID_STUDIO.md` to see how to build the app.
+
+---
+
+**Questions?** Re-read this guide carefully — each step is important!

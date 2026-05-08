@@ -1,176 +1,176 @@
-# Política de Privacidade - Frases Motivacionais
+# Privacy Policy - Motivational Quotes
 
-**Última atualização:** 18 de novembro de 2024
+**Last updated:** November 18, 2024
 
-## 1. Introdução
+## 1. Introduction
 
-Esta Política de Privacidade descreve como o aplicativo "Frases Motivacionais" ("nós", "nosso" ou "o App") coleta, usa, armazena e compartilha suas informações pessoais.
+This Privacy Policy describes how the "Motivational Quotes" application ("we", "our", or "the App") collects, uses, stores, and shares your personal information.
 
-Ao usar nosso aplicativo, você concorda com a coleta e uso de informações de acordo com esta política.
+By using our application, you agree to the collection and use of information in accordance with this policy.
 
-## 2. Informações que Coletamos
+## 2. Information We Collect
 
-### 2.1 Informações Fornecidas por Você
-- **Preferências do App:** Tema escolhido, tamanho de fonte, horário de notificações
-- **Frases Favoritas:** Frases que você marca como favoritas são armazenadas localmente no seu dispositivo
+### 2.1 Information You Provide
+- **App Preferences:** Chosen theme, font size, notification time
+- **Favorite Quotes:** Quotes you mark as favorites are stored locally on your device
 
-### 2.2 Informações Coletadas Automaticamente
-- **Dados de Uso:** Interações com o app (frases visualizadas, compartilhamentos)
-- **Dados de Dispositivo:** Modelo do dispositivo, versão do Android, idioma
-- **Dados de Crash:** Informações sobre falhas do aplicativo para melhorias
+### 2.2 Automatically Collected Information
+- **Usage Data:** Interactions with the app (quotes viewed, shares)
+- **Device Data:** Device model, Android version, language
+- **Crash Data:** Information about app crashes for improvements
 
-### 2.3 Tecnologias de Rastreamento
-Utilizamos as seguintes tecnologias:
-- **Google Analytics for Firebase:** Para entender como você usa o app
-- **AdMob (Google Ads):** Para exibir anúncios personalizados
-- **Crash Analytics:** Para identificar e corrigir bugs
+### 2.3 Tracking Technologies
+We use the following technologies:
+- **Google Analytics for Firebase:** To understand how you use the app
+- **AdMob (Google Ads):** To display personalized ads
+- **Crash Analytics:** To identify and fix bugs
 
-## 3. Como Usamos Suas Informações
+## 3. How We Use Your Information
 
-Usamos as informações coletadas para:
-- ✅ Fornecer e manter o funcionamento do App
-- ✅ Personalizar sua experiência (tema, notificações)
-- ✅ Exibir anúncios relevantes
-- ✅ Melhorar o App e corrigir bugs
-- ✅ Enviar notificações (apenas se você ativar)
-- ✅ Analisar padrões de uso para melhorias
+We use the collected information to:
+- Provide and maintain the App
+- Personalize your experience (theme, notifications)
+- Display relevant ads
+- Improve the App and fix bugs
+- Send notifications (only if you enable them)
+- Analyze usage patterns for improvements
 
-## 4. Compartilhamento de Informações
+## 4. Information Sharing
 
-### 4.1 Com Terceiros
-Compartilhamos informações com:
+### 4.1 With Third Parties
+We share information with:
 
 **Google Firebase/Analytics:**
-- Análise de uso do app
-- Dados agregados e anônimos
+- App usage analysis
+- Aggregated and anonymous data
 
 **Google AdMob:**
-- Exibição de anúncios
-- ID de publicidade (pode ser redefinido nas configurações do Android)
+- Ad display
+- Advertising ID (can be reset in Android settings)
 
-### 4.2 Não Compartilhamos
-❌ NÃO vendemos suas informações pessoais
-❌ NÃO compartilhamos informações identificáveis com terceiros para marketing
-❌ NÃO acessamos suas frases favoritas (ficam apenas no seu dispositivo)
+### 4.2 What We Do Not Share
+- We do NOT sell your personal information
+- We do NOT share identifiable information with third parties for marketing
+- We do NOT access your favorite quotes (they stay only on your device)
 
-## 5. Armazenamento de Dados
+## 5. Data Storage
 
-### 5.1 Local (No Seu Dispositivo)
-- Frases favoritas
-- Preferências do app (tema, fonte, notificações)
-- Cache de frases
+### 5.1 Local (On Your Device)
+- Favorite quotes
+- App preferences (theme, font, notifications)
+- Quote cache
 
-### 5.2 Nuvem (Firebase/Google)
-- Dados anônimos de uso
-- Estatísticas agregadas
-- Relatórios de crash (não contêm informações pessoais)
+### 5.2 Cloud (Firebase/Google)
+- Anonymous usage data
+- Aggregated statistics
+- Crash reports (do not contain personal information)
 
-### 5.3 Retenção de Dados
-- **Dados locais:** Permanecem até você desinstalar o app
-- **Dados analíticos:** Retidos por 14 meses (padrão do Google Analytics)
-- **Dados de anúncios:** Controlados pela política do AdMob
+### 5.3 Data Retention
+- **Local data:** Remains until you uninstall the app
+- **Analytics data:** Retained for 14 months (Google Analytics default)
+- **Ad data:** Controlled by AdMob policy
 
-## 6. Seus Direitos (LGPD/GDPR)
+## 6. Your Rights (LGPD/GDPR)
 
-Você tem direito a:
-- ✅ **Acessar** seus dados
-- ✅ **Corrigir** informações incorretas
-- ✅ **Deletar** seus dados
-- ✅ **Revogar consentimento** para anúncios personalizados
-- ✅ **Portabilidade** de dados
+You have the right to:
+- **Access** your data
+- **Correct** incorrect information
+- **Delete** your data
+- **Revoke consent** for personalized ads
+- **Data portability**
 
-### Como Exercer Seus Direitos:
-- **Deletar dados locais:** Desinstale o app ou limpe dados nas Configurações do Android
-- **Opt-out de anúncios:** Configure em "Anúncios" nas Configurações do Android
-- **Desativar Analytics:** Configure em Configurações > Privacidade do App
+### How to Exercise Your Rights:
+- **Delete local data:** Uninstall the app or clear data in Android Settings
+- **Opt out of ads:** Configure in "Ads" in Android Settings
+- **Disable Analytics:** Configure in Settings > App Privacy
 
-## 7. Publicidade
+## 7. Advertising
 
 ### 7.1 Google AdMob
-Usamos Google AdMob para exibir anúncios. O AdMob pode coletar:
-- ID de publicidade do seu dispositivo
-- Endereço IP
-- Informações sobre interações com anúncios
+We use Google AdMob to display ads. AdMob may collect:
+- Your device's advertising ID
+- IP address
+- Information about ad interactions
 
-### 7.2 Personalização de Anúncios
-Você pode optar por não receber anúncios personalizados:
-1. Vá em Configurações do Android
-2. Google > Anúncios
-3. Ative "Desativar personalização de anúncios"
+### 7.2 Ad Personalization
+You can opt out of personalized ads:
+1. Go to Android Settings
+2. Google > Ads
+3. Enable "Opt out of Ads Personalization"
 
-## 8. Segurança
+## 8. Security
 
-Implementamos medidas de segurança para proteger seus dados:
-- ✅ Criptografia de dados em trânsito (HTTPS)
-- ✅ Armazenamento seguro local (Android Keystore quando aplicável)
-- ✅ Acesso restrito a dados do Firebase
-- ✅ Atualizações regulares de segurança
+We implement security measures to protect your data:
+- Data encryption in transit (HTTPS)
+- Secure local storage (Android Keystore where applicable)
+- Restricted access to Firebase data
+- Regular security updates
 
-**Nota:** Nenhum método de transmissão pela internet é 100% seguro. Fazemos o melhor possível para proteger seus dados.
+**Note:** No method of internet transmission is 100% secure. We do our best to protect your data.
 
-## 9. Crianças
+## 9. Children
 
-Este app NÃO é direcionado a menores de 13 anos.
+This app is NOT directed at children under 13.
 
-Não coletamos intencionalmente informações de crianças. Se você é pai/mãe e descobre que seu filho forneceu informações, entre em contato para que possamos deletá-las.
+We do not intentionally collect information from children. If you are a parent and discover that your child has provided information, please contact us so we can delete it.
 
-## 10. Alterações nesta Política
+## 10. Changes to This Policy
 
-Podemos atualizar esta Política periodicamente. Notificaremos você sobre mudanças significativas através de:
-- Notificação no app
-- Atualização da data "Última atualização" no topo
+We may update this Policy periodically. We will notify you of significant changes through:
+- In-app notification
+- Updating the "Last updated" date at the top
 
-Recomendamos revisar esta página periodicamente.
+We recommend reviewing this page periodically.
 
-## 11. Links para Outros Sites
+## 11. Links to Other Sites
 
-Nosso app pode conter links para sites externos (ao compartilhar frases). Não somos responsáveis pelo conteúdo ou práticas de privacidade desses sites.
+Our app may contain links to external sites (when sharing quotes). We are not responsible for the content or privacy practices of those sites.
 
-## 12. Conformidade Legal
+## 12. Legal Compliance
 
-### LGPD (Lei Geral de Proteção de Dados - Brasil)
-Este app está em conformidade com a LGPD (Lei nº 13.709/2018).
+### LGPD (General Data Protection Law - Brazil)
+This app complies with LGPD (Law No. 13,709/2018).
 
-### GDPR (General Data Protection Regulation - UE)
-Para usuários da União Europeia, respeitamos os direitos garantidos pelo GDPR.
+### GDPR (General Data Protection Regulation - EU)
+For European Union users, we respect the rights guaranteed by the GDPR.
 
-### COPPA (Children's Online Privacy Protection Act - EUA)
-Não coletamos intencionalmente dados de crianças menores de 13 anos.
+### COPPA (Children's Online Privacy Protection Act - USA)
+We do not intentionally collect data from children under 13.
 
-## 13. Contato
+## 13. Contact
 
-Se você tiver dúvidas sobre esta Política de Privacidade:
+If you have questions about this Privacy Policy:
 
-**E-mail:** privacidade.frasesmotivacionais@gmail.com
-**Desenvolvedor:** Frases Motivacionais App Team
-**Localização:** Brasil
+**Email:** privacidade.frasesmotivacionais@gmail.com  
+**Developer:** Motivational Quotes App Team  
+**Location:** Brazil
 
-**Tempo de resposta:** Até 30 dias
-
----
-
-## 14. Consentimento
-
-Ao usar o aplicativo "Frases Motivacionais", você reconhece que leu, entendeu e concorda com esta Política de Privacidade.
+**Response time:** Up to 30 days
 
 ---
 
-**Versão:** 1.0.0
-**Data de vigência:** 18 de novembro de 2024
-**Idioma:** Português (Brasil)
+## 14. Consent
+
+By using the "Motivational Quotes" application, you acknowledge that you have read, understood, and agree to this Privacy Policy.
 
 ---
 
-## Resumo Rápido (TL;DR)
-
-✅ **O que coletamos:** Preferências do app, uso anônimo, dados de crash
-✅ **O que NÃO coletamos:** Informações pessoais identificáveis, contatos, localização precisa
-✅ **Anúncios:** Sim, usando Google AdMob (você pode desativar personalização)
-✅ **Seus dados:** Ficam principalmente no seu dispositivo
-✅ **Segurança:** Usamos criptografia e boas práticas
-✅ **Seus direitos:** Você pode acessar, corrigir, deletar seus dados
-✅ **Contato:** privacidade.frasesmotivacionais@gmail.com
+**Version:** 1.0.0  
+**Effective date:** November 18, 2024  
+**Language:** English
 
 ---
 
-Esta política foi gerada para proteger sua privacidade e cumprir as leis brasileiras (LGPD), europeias (GDPR) e internacionais.
+## Quick Summary (TL;DR)
+
+- **What we collect:** App preferences, anonymous usage, crash data
+- **What we do NOT collect:** Personally identifiable information, contacts, precise location
+- **Ads:** Yes, using Google AdMob (you can disable personalization)
+- **Your data:** Stays mainly on your device
+- **Security:** We use encryption and best practices
+- **Your rights:** You can access, correct, delete your data
+- **Contact:** privacidade.frasesmotivacionais@gmail.com
+
+---
+
+This policy was created to protect your privacy and comply with Brazilian (LGPD), European (GDPR), and international laws.

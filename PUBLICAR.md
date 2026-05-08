@@ -1,28 +1,28 @@
-# 🚀 Como Publicar o App na Google Play Store
+# How to Publish the App on Google Play Store
 
-## 📋 Pré-requisitos
+## Prerequisites
 
-1. ✅ Firebase configurado (google-services.json)
-2. ✅ AdMob configurado (IDs reais de produção)
-3. ✅ App testado e funcionando
-4. ✅ Conta de desenvolvedor na Google Play ($25 única vez)
+1. Firebase configured (google-services.json)
+2. AdMob configured (real production IDs)
+3. App tested and working
+4. Google Play developer account ($25 one-time fee)
 
-## 🔑 Passo 1: Gerar Keystore
+## Step 1: Generate Keystore
 
-O keystore é necessário para assinar seu app:
+The keystore is required to sign your app:
 
 ```bash
-keytool -genkey -v -keystore frases-motivacionais.jks -keyalg RSA -keysize 2048 -validity 10000 -alias frases
+keytool -genkey -v -keystore motivational-quotes.jks -keyalg RSA -keysize 2048 -validity 10000 -alias quotes
 ```
 
-**IMPORTANTE**: 
-- Guarde a senha do keystore em local seguro
-- Nunca perca o arquivo .jks (sem ele você não poderá atualizar o app)
-- Adicione o .jks ao .gitignore (já configurado)
+**IMPORTANT**: 
+- Keep the keystore password in a safe place
+- Never lose the .jks file (without it you can never update the app)
+- Add the .jks to .gitignore (already configured)
 
-## 📝 Passo 2: Configurar Assinatura
+## Step 2: Configure Signing
 
-Edite `app/build.gradle` e adicione:
+Edit `app/build.gradle` and add:
 
 ```gradle
 android {
@@ -30,10 +30,10 @@ android {
     
     signingConfigs {
         release {
-            storeFile file("../frases-motivacionais.jks")
-            storePassword "SUA_SENHA"
-            keyAlias "frases"
-            keyPassword "SUA_SENHA"
+            storeFile file("../motivational-quotes.jks")
+            storePassword "YOUR_PASSWORD"
+            keyAlias "quotes"
+            keyPassword "YOUR_PASSWORD"
         }
     }
     
@@ -47,242 +47,241 @@ android {
 }
 ```
 
-## 🔨 Passo 3: Gerar AAB (Android App Bundle)
+## Step 3: Generate AAB (Android App Bundle)
 
-No terminal, execute:
+In the terminal, run:
 
 ```bash
-cd FrasesMotivacionais
+cd MotivationalQuotes
 ./gradlew bundleRelease
 ```
 
-O arquivo será gerado em:
+The file will be generated at:
 `app/build/outputs/bundle/release/app-release.aab`
 
-## 🎨 Passo 4: Preparar Assets
+## Step 4: Prepare Assets
 
-Antes de publicar, prepare:
+Before publishing, prepare:
 
-### Ícone do App
-- Tamanho: 512x512 pixels
-- Formato: PNG
-- Sem transparência
-- Ferramenta gratuita: [Icon Kitchen](https://icon.kitchen/)
+### App Icon
+- Size: 512x512 pixels
+- Format: PNG
+- No transparency
+- Free tool: [Icon Kitchen](https://icon.kitchen/)
 
-### Screenshots (pelo menos 2)
-- Telefone: 1080x1920 pixels
-- Tire screenshots do app funcionando
-- Ferramenta: Use o próprio emulador do Android Studio
+### Screenshots (at least 2)
+- Phone: 1080x1920 pixels
+- Take screenshots of the app in use
+- Tool: Use the Android Studio emulator
 
-### Gráfico de Destaque
-- Tamanho: 1024x500 pixels
-- Ferramenta: [Canva](https://www.canva.com/)
+### Feature Graphic
+- Size: 1024x500 pixels
+- Tool: [Canva](https://www.canva.com/)
 
-## 📱 Passo 5: Criar App no Google Play Console
+## Step 5: Create App on Google Play Console
 
-1. Acesse [Google Play Console](https://play.google.com/console)
-2. Clique em "Criar app"
-3. Preencha:
-   - **Nome**: Frases Motivacionais
-   - **Idioma padrão**: Português (Brasil)
-   - **App ou jogo**: App
-   - **Gratuito ou pago**: Gratuito
-4. Aceite as políticas
+1. Go to [Google Play Console](https://play.google.com/console)
+2. Click "Create app"
+3. Fill in:
+   - **Name**: Motivational Quotes
+   - **Default language**: English
+   - **App or game**: App
+   - **Free or paid**: Free
+4. Accept the policies
 
-## 📋 Passo 6: Preencher Informações
+## Step 6: Fill in Information
 
-### Detalhes do App
-- **Descrição curta** (80 caracteres):
+### App Details
+- **Short description** (80 characters):
   ```
-  Frases motivacionais diárias para inspirar e transformar sua vida!
-  ```
-
-- **Descrição completa** (4000 caracteres):
-  ```
-  🌟 FRASES MOTIVACIONAIS - Inspire-se Todos os Dias! 🌟
-
-  Transforme sua vida com frases motivacionais e inspiradoras selecionadas especialmente para você!
-
-  ✨ PRINCIPAIS FUNCIONALIDADES:
-
-  📖 Centenas de Frases
-  • Frases de motivação, sucesso, amor, vida e sabedoria
-  • Conteúdo atualizado regularmente
-  • Autores famosos e anônimos
-
-  ⭐ Favoritos
-  • Salve suas frases preferidas
-  • Acesse rapidamente suas frases favoritas
-  • Organize por categorias
-
-  🔄 Compartilhe
-  • Compartilhe frases no WhatsApp, Instagram, Facebook
-  • Inspire amigos e familiares
-  • Espalhe positividade
-
-  🔔 Notificações Diárias
-  • Receba uma frase motivacional todo dia
-  • Comece o dia inspirado
-  • Configure o horário ideal
-
-  🎨 Design Moderno
-  • Interface limpa e elegante
-  • Fácil de usar
-  • Experiência fluida
-
-  💪 BENEFÍCIOS:
-
-  • Aumente sua motivação diária
-  • Melhore seu mindset
-  • Inspiração sempre à mão
-  • Gratuito e sem cadastro obrigatório
-
-  Baixe agora e comece sua jornada de inspiração! 🚀
+  Daily motivational quotes to inspire and transform your life!
   ```
 
-### Categorização
-- **Categoria**: Estilo de vida
-- **Tags**: Motivação, Frases, Inspiração
+- **Full description** (4000 characters):
+  ```
+  MOTIVATIONAL QUOTES - Get Inspired Every Day!
 
-### Detalhes de Contato
-- **Email**: seu-email@gmail.com
-- **Site**: (opcional)
+  Transform your life with motivational and inspiring quotes selected especially for you!
 
-## 📜 Passo 7: Política de Privacidade
+  MAIN FEATURES:
 
-**OBRIGATÓRIO**: Você precisa de uma política de privacidade hospedada online.
+  Hundreds of Quotes
+  • Motivation, success, love, life, and wisdom quotes
+  • Regularly updated content
+  • Famous and anonymous authors
 
-### Opções:
+  Favorites
+  • Save your favorite quotes
+  • Quickly access your favorite quotes
+  • Organize by category
 
-1. **Gerador Gratuito**: [App Privacy Policy Generator](https://app-privacy-policy-generator.nisrulz.com/)
+  Share
+  • Share quotes on WhatsApp, Instagram, Facebook
+  • Inspire friends and family
+  • Spread positivity
+
+  Daily Notifications
+  • Receive a motivational quote every day
+  • Start the day inspired
+  • Set your ideal time
+
+  Modern Design
+  • Clean and elegant interface
+  • Easy to use
+  • Smooth experience
+
+  BENEFITS:
+  • Boost your daily motivation
+  • Improve your mindset
+  • Inspiration always at hand
+  • Free with no required registration
+
+  Download now and start your inspiration journey!
+  ```
+
+### Categorization
+- **Category**: Lifestyle
+- **Tags**: Motivation, Quotes, Inspiration
+
+### Contact Details
+- **Email**: your-email@gmail.com
+- **Website**: (optional)
+
+## Step 7: Privacy Policy
+
+**REQUIRED**: You need a privacy policy hosted online.
+
+### Options:
+
+1. **Free Generator**: [App Privacy Policy Generator](https://app-privacy-policy-generator.nisrulz.com/)
    
-2. **Hospedar no GitHub Pages** (grátis):
-   - Crie repositório "privacy-policy"
-   - Adicione arquivo `index.html` com a política
-   - Ative GitHub Pages nas configurações
-   - URL: `https://seu-usuario.github.io/privacy-policy/`
+2. **Host on GitHub Pages** (free):
+   - Create a "privacy-policy" repository
+   - Add an `index.html` file with the policy
+   - Enable GitHub Pages in settings
+   - URL: `https://your-username.github.io/privacy-policy/`
 
-3. **Template Básico**:
+3. **Basic Template**:
    ```
-   Esta política descreve como o app "Frases Motivacionais" coleta e usa dados:
+   This policy describes how the "Motivational Quotes" app collects and uses data:
    
-   - O app usa Firebase Analytics para estatísticas anônimas de uso
-   - O app usa Google AdMob para exibir anúncios
-   - Nenhum dado pessoal é coletado diretamente pelo app
-   - Favoritos são salvos apenas localmente no dispositivo
+   - The app uses Firebase Analytics for anonymous usage statistics
+   - The app uses Google AdMob to display ads
+   - No personal data is collected directly by the app
+   - Favorites are saved only locally on the device
    
-   Para dúvidas: seu-email@gmail.com
+   Questions: your-email@gmail.com
    ```
 
-## 🎯 Passo 8: Classificação de Conteúdo
+## Step 8: Content Rating
 
-1. Complete o questionário de classificação
-2. Para este app:
-   - **Violência**: Não
-   - **Conteúdo sexual**: Não
-   - **Linguagem imprópria**: Não
-   - **Drogas**: Não
-   - **Outras categorias**: Não
+1. Complete the rating questionnaire
+2. For this app:
+   - **Violence**: No
+   - **Sexual content**: No
+   - **Inappropriate language**: No
+   - **Drugs**: No
+   - **Other categories**: No
 
-## 📤 Passo 9: Upload do AAB
+## Step 9: Upload the AAB
 
-1. No Play Console, vá em "Produção"
-2. Clique em "Criar nova versão"
-3. Faça upload do arquivo `app-release.aab`
-4. Adicione notas de versão:
+1. In Play Console, go to "Production"
+2. Click "Create new release"
+3. Upload the `app-release.aab` file
+4. Add release notes:
    ```
-   Versão 1.0:
-   • Lançamento inicial
-   • Centenas de frases motivacionais
-   • Sistema de favoritos
-   • Compartilhamento social
-   • Notificações diárias
+   Version 1.0:
+   • Initial launch
+   • Hundreds of motivational quotes
+   • Favorites system
+   • Social sharing
+   • Daily notifications
    ```
 
-## ✅ Passo 10: Revisão e Publicação
+## Step 10: Review and Publish
 
-1. Revise todas as informações
-2. Complete todos os itens obrigatórios (marcados com ⚠️)
-3. Clique em "Enviar para revisão"
+1. Review all information
+2. Complete all required items (marked with warning)
+3. Click "Submit for review"
 
-### Tempo de Análise
-- Primeira publicação: 2-7 dias
-- Atualizações: 1-3 dias
+### Review Time
+- First publication: 2-7 days
+- Updates: 1-3 days
 
-## 💰 Estratégias de Marketing
+## Marketing Strategies
 
-### Após Aprovação:
+### After Approval:
 
-1. **Redes Sociais**:
-   - Crie página no Instagram/Facebook
-   - Poste frases diárias com link do app
-   - Use hashtags: #motivacao #frases #inspiracao
+1. **Social Media**:
+   - Create an Instagram/Facebook page
+   - Post daily quotes with app link
+   - Use hashtags: #motivation #quotes #inspiration
 
 2. **WhatsApp/Telegram**:
-   - Compartilhe em grupos relevantes
-   - Crie canal próprio
+   - Share in relevant groups
+   - Create your own channel
 
 3. **YouTube**:
-   - Vídeos de "Top 10 Frases Motivacionais"
-   - Link na descrição
+   - "Top 10 Motivational Quotes" videos
+   - App link in description
 
 4. **ASO (App Store Optimization)**:
-   - Título: "Frases Motivacionais - Inspiração Diária"
-   - Palavras-chave: motivação, frases, inspiração, citações
-   - Atualize regularmente
+   - Title: "Motivational Quotes - Daily Inspiration"
+   - Keywords: motivation, quotes, inspiration, citations
+   - Update regularly
 
-## 📊 Monitoramento
+## Monitoring
 
-Após publicar, monitore:
+After publishing, monitor:
 
 1. **Play Console**:
    - Downloads
-   - Avaliações
+   - Reviews
    - Crashes
 
 2. **Firebase Analytics**:
-   - Usuários ativos
-   - Retenção
-   - Eventos
+   - Active users
+   - Retention
+   - Events
 
 3. **AdMob**:
-   - Receita diária
-   - CPM (custo por mil impressões)
-   - Taxa de cliques
+   - Daily revenue
+   - CPM (cost per thousand impressions)
+   - Click-through rate
 
-## 🎯 Metas Realistas
+## Realistic Goals
 
-### Primeiros 3 meses:
-- 1.000 downloads: $5-20/mês
-- 5.000 downloads: $25-100/mês
-- 10.000 downloads: $50-200/mês
+### First 3 months:
+- 1,000 downloads: $5-20/month
+- 5,000 downloads: $25-100/month
+- 10,000 downloads: $50-200/month
 
-### Fatores que influenciam:
-- Qualidade do tráfego
-- Engajamento (tempo de uso)
-- Localização dos usuários
-- Taxa de cliques nos anúncios
+### Factors that influence:
+- Traffic quality
+- Engagement (usage time)
+- User location
+- Ad click-through rate
 
-## ⚠️ Avisos Importantes
+## Important Warnings
 
-1. **Nunca clique nos próprios anúncios** (banimento do AdMob)
-2. **Não peça para outros clicarem** (fraude de cliques)
-3. **Respeite direitos autorais** (use frases de domínio público)
-4. **Mantenha o app atualizado** (correções e novidades)
-5. **Responda avaliações** (mostra que você se importa)
+1. **Never click on your own ads** (AdMob ban)
+2. **Don't ask others to click** (click fraud)
+3. **Respect copyrights** (use public domain quotes)
+4. **Keep the app updated** (fixes and new features)
+5. **Reply to reviews** (shows you care)
 
-## 🆘 Problemas Comuns
+## Common Issues
 
-### App Rejeitado?
+### App Rejected?
 
-Motivos comuns:
-- Política de privacidade ausente/inválida
-- Ícone de baixa qualidade
-- Descrição enganosa
-- Violação de direitos autorais
+Common reasons:
+- Missing/invalid privacy policy
+- Low quality icon
+- Misleading description
+- Copyright violations
 
-Solução: Leia o feedback da Google e corrija os problemas.
+Solution: Read Google's feedback and fix the issues.
 
 ---
 
-**Boa sorte com seu app!** 🚀💰
+**Good luck with your app!**

@@ -1,50 +1,50 @@
-# ⚡ Início Rápido
+# Quick Start
 
-## 🎯 Passos Essenciais (15 minutos)
+## Essential Steps (15 minutes)
 
-### 1. Instalar Android Studio
-- Baixe em: https://developer.android.com/studio
-- Instale e configure o SDK Android
+### 1. Install Android Studio
+- Download at: https://developer.android.com/studio
+- Install and configure the Android SDK
 
-### 2. Configurar Firebase (5 min)
-1. Acesse: https://console.firebase.google.com/
-2. Crie novo projeto "Frases Motivacionais"
-3. Adicione app Android:
-   - Pacote: `com.motivacional.frases`
-4. Baixe `google-services.json`
-5. Cole na pasta `app/` do projeto
+### 2. Configure Firebase (5 min)
+1. Go to: https://console.firebase.google.com/
+2. Create a new project "Motivational Quotes"
+3. Add Android app:
+   - Package: `com.motivacional.frases`
+4. Download `google-services.json`
+5. Place it in the `app/` folder of the project
 
-### 3. Ativar Firestore (2 min)
-1. No Firebase Console → Firestore Database
-2. Criar banco de dados → Modo de produção
-3. Localização: southamerica-east1
+### 3. Enable Firestore (2 min)
+1. In Firebase Console → Firestore Database
+2. Create database → Production mode
+3. Location: southamerica-east1
 
-### 4. Abrir Projeto (3 min)
-1. Android Studio → Open → Selecione pasta "FrasesMotivacionais"
-2. Aguarde sincronização do Gradle
-3. Conecte celular ou inicie emulador
+### 4. Open Project (3 min)
+1. Android Studio → Open → Select the "FrasesMotivacionais" folder
+2. Wait for Gradle sync
+3. Connect a phone or start an emulator
 
-### 5. Executar App (5 min)
-1. Clique em Run (▶️)
-2. No app, clique nos 3 pontos → "Inicializar Database"
-3. Pronto! O app está funcionando
+### 5. Run the App (5 min)
+1. Click Run (▶)
+2. In the app, tap the 3-dot menu → "Initialize Database"
+3. Done! The app is running
 
-## 💰 Para Monetizar
+## Monetization
 
-### Configurar AdMob (10 min)
-1. Acesse: https://apps.admob.com/
-2. Adicionar app "Frases Motivacionais"
-3. Criar 2 blocos de anúncios:
+### Configure AdMob (10 min)
+1. Go to: https://apps.admob.com/
+2. Add app "Motivational Quotes"
+3. Create 2 ad units:
    - Banner
-   - Intersticial
-4. Substituir IDs em:
+   - Interstitial
+4. Replace IDs in:
    - `AndroidManifest.xml` (APPLICATION_ID)
-   - `strings.xml` (banner_ad_unit_id e interstitial_ad_unit_id)
+   - `strings.xml` (banner_ad_unit_id and interstitial_ad_unit_id)
 
-## 📱 Para Publicar
+## Publishing
 
-Veja o guia completo em `PUBLICAR.md`
+See the full guide in `PUBLICAR.md`
 
 ---
 
-**Dúvidas?** Leia `README.md` para documentação completa
+**Questions?** Read `README.md` for full documentation
