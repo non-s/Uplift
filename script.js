@@ -3,60 +3,60 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const QUOTES = [
-    { text:"The only way to do great work is to love what you do.", author:"Steve Jobs", cat:"motivacao" },
-    { text:"You don't have to be great to start, but you have to start to be great.", author:"Zig Ziglar", cat:"motivacao" },
-    { text:"Perseverance is the path to success.", author:"Charles Chaplin", cat:"motivacao" },
-    { text:"Don't wait. The time will never be just right.", author:"Napoleon Hill", cat:"motivacao" },
-    { text:"Start where you are. Use what you have. Do what you can.", author:"Arthur Ashe", cat:"motivacao" },
-    { text:"Action is the foundational key to all success.", author:"Pablo Picasso", cat:"motivacao" },
-    { text:"Dreams don't work unless you do.", author:"John C. Maxwell", cat:"motivacao" },
-    { text:"The secret of getting ahead is getting started.", author:"Mark Twain", cat:"motivacao" },
-    { text:"You are braver than you believe, stronger than you seem.", author:"A. A. Milne", cat:"motivacao" },
-    { text:"The difference between the impossible and the possible lies in determination.", author:"Tommy Lasorda", cat:"motivacao" },
-    { text:"Don't give up. The beginning is always the hardest.", author:"Unknown", cat:"motivacao" },
-    { text:"Every day is a new opportunity to change your life.", author:"Unknown", cat:"motivacao" },
-    { text:"Success is the sum of small efforts repeated day after day.", author:"Robert Collier", cat:"sucesso" },
-    { text:"Success usually comes to those who are too busy to be looking for it.", author:"Henry David Thoreau", cat:"sucesso" },
-    { text:"Don't measure success by what you've achieved, but by the obstacles you've overcome.", author:"Booker T. Washington", cat:"sucesso" },
-    { text:"Success is going from failure to failure without loss of enthusiasm.", author:"Winston Churchill", cat:"sucesso" },
-    { text:"The difference between ordinary and extraordinary is that little extra.", author:"Jimmy Johnson", cat:"sucesso" },
-    { text:"Winners never quit and quitters never win.", author:"Vince Lombardi", cat:"sucesso" },
-    { text:"To succeed, you first have to believe that you can.", author:"Nikos Kazantzakis", cat:"sucesso" },
-    { text:"Failure is the opportunity to begin again, this time more intelligently.", author:"Henry Ford", cat:"sucesso" },
-    { text:"Work while they sleep, learn while they party.", author:"Unknown", cat:"sucesso" },
-    { text:"Love does not consist of gazing at each other, but in looking together in the same direction.", author:"Antoine de Saint-Exupéry", cat:"amor" },
-    { text:"To love is to find your own happiness in the happiness of another.", author:"Gottfried Leibniz", cat:"amor" },
-    { text:"Love is the only thing that grows when shared.", author:"Antoine de Saint-Exupéry", cat:"amor" },
-    { text:"The best proof of love is trust.", author:"Joyce Brothers", cat:"amor" },
-    { text:"Where there is love there is life.", author:"Mahatma Gandhi", cat:"amor" },
-    { text:"Love heals people — both the ones who give it and the ones who receive it.", author:"Karl Menninger", cat:"amor" },
-    { text:"Life is what happens while you are busy making other plans.", author:"John Lennon", cat:"vida" },
-    { text:"In the middle of every difficulty lies opportunity.", author:"Albert Einstein", cat:"vida" },
-    { text:"Live as if you were to die tomorrow. Learn as if you were to live forever.", author:"Mahatma Gandhi", cat:"vida" },
-    { text:"Life is too short to be small.", author:"Benjamin Disraeli", cat:"vida" },
-    { text:"Don't cry because it's over. Smile because it happened.", author:"Gabriel García Márquez", cat:"vida" },
-    { text:"What doesn't kill you makes you stronger.", author:"Friedrich Nietzsche", cat:"vida" },
-    { text:"Be the change you wish to see in the world.", author:"Mahatma Gandhi", cat:"vida" },
-    { text:"Enjoy every moment. Time is the most precious asset.", author:"Unknown", cat:"vida" },
-    { text:"Know thyself.", author:"Socrates", cat:"sabedoria" },
-    { text:"Our greatest glory is not in never falling, but in rising every time we fall.", author:"Confucius", cat:"sabedoria" },
-    { text:"Wisdom begins when we know what we do not know.", author:"Socrates", cat:"sabedoria" },
-    { text:"Education is the most powerful weapon you can use to change the world.", author:"Nelson Mandela", cat:"sabedoria" },
-    { text:"An investment in knowledge always pays the best interest.", author:"Benjamin Franklin", cat:"sabedoria" },
-    { text:"Doubt is the beginning of wisdom.", author:"Aristotle", cat:"sabedoria" },
+    { text:"A única forma de fazer um ótimo trabalho é amar o que você faz.", author:"Steve Jobs", cat:"motivacao" },
+    { text:"Você não precisa ser grande para começar, mas precisa começar para ser grande.", author:"Zig Ziglar", cat:"motivacao" },
+    { text:"A perseverança é o caminho do êxito.", author:"Charles Chaplin", cat:"motivacao" },
+    { text:"Não espere. O momento certo nunca chegará.", author:"Napoleon Hill", cat:"motivacao" },
+    { text:"Comece de onde você está. Use o que você tem. Faça o que puder.", author:"Arthur Ashe", cat:"motivacao" },
+    { text:"A ação é a chave fundamental para todo sucesso.", author:"Pablo Picasso", cat:"motivacao" },
+    { text:"Os sonhos não funcionam a menos que você trabalhe.", author:"John C. Maxwell", cat:"motivacao" },
+    { text:"O segredo para avançar é começar.", author:"Mark Twain", cat:"motivacao" },
+    { text:"Você é mais corajoso do que acredita e mais forte do que parece.", author:"A. A. Milne", cat:"motivacao" },
+    { text:"A diferença entre o impossível e o possível está na determinação.", author:"Tommy Lasorda", cat:"motivacao" },
+    { text:"Não desista. O começo é sempre o mais difícil.", author:"Desconhecido", cat:"motivacao" },
+    { text:"Cada dia é uma nova oportunidade de mudar a sua vida.", author:"Desconhecido", cat:"motivacao" },
+    { text:"O sucesso é a soma de pequenos esforços repetidos dia após dia.", author:"Robert Collier", cat:"sucesso" },
+    { text:"O sucesso geralmente vem para quem está ocupado demais para procuá-lo.", author:"Henry David Thoreau", cat:"sucesso" },
+    { text:"Não meça o sucesso pelo que você conquistou, mas pelos obstáculos que superou.", author:"Booker T. Washington", cat:"sucesso" },
+    { text:"Sucesso é ir de fracasso em fracasso sem perder o entusiasmo.", author:"Winston Churchill", cat:"sucesso" },
+    { text:"A diferença entre o comum e o extraordinário é esse pequeno extra.", author:"Jimmy Johnson", cat:"sucesso" },
+    { text:"Vencedores nunca desistem e quem desiste nunca vence.", author:"Vince Lombardi", cat:"sucesso" },
+    { text:"Para ter sucesso, primeiro você precisa acreditar que é possível.", author:"Nikos Kazantzakis", cat:"sucesso" },
+    { text:"O fracasso é a oportunidade de começar de novo, desta vez de forma mais inteligente.", author:"Henry Ford", cat:"sucesso" },
+    { text:"Trabalhe enquanto eles dormem, aprenda enquanto eles festejam.", author:"Desconhecido", cat:"sucesso" },
+    { text:"O amor não consiste em olhar um para o outro, mas em olhar juntos na mesma direção.", author:"Antoine de Saint-Exupéry", cat:"amor" },
+    { text:"Amar é encontrar a própria felicidade na felicidade do outro.", author:"Gottfried Leibniz", cat:"amor" },
+    { text:"O amor é a única coisa que cresce quando é compartilhada.", author:"Antoine de Saint-Exupéry", cat:"amor" },
+    { text:"A melhor prova de amor é a confiança.", author:"Joyce Brothers", cat:"amor" },
+    { text:"Onde há amor, há vida.", author:"Mahatma Gandhi", cat:"amor" },
+    { text:"O amor cura as pessoas — tanto quem o oferece quanto quem o recebe.", author:"Karl Menninger", cat:"amor" },
+    { text:"A vida é o que acontece enquanto você está ocupado fazendo outros planos.", author:"John Lennon", cat:"vida" },
+    { text:"No meio de cada dificuldade existe uma oportunidade.", author:"Albert Einstein", cat:"vida" },
+    { text:"Viva como se fosse morrer amanhã. Aprenda como se fosse viver para sempre.", author:"Mahatma Gandhi", cat:"vida" },
+    { text:"A vida é curta demais para ser pequena.", author:"Benjamin Disraeli", cat:"vida" },
+    { text:"Não chore porque acabou. Sorria porque aconteceu.", author:"Gabriel García Márquez", cat:"vida" },
+    { text:"O que não te mata te fortalece.", author:"Friedrich Nietzsche", cat:"vida" },
+    { text:"Seja a mudança que você quer ver no mundo.", author:"Mahatma Gandhi", cat:"vida" },
+    { text:"Aproveite cada momento. O tempo é o bem mais precioso.", author:"Desconhecido", cat:"vida" },
+    { text:"Conhece-te a ti mesmo.", author:"Sócrates", cat:"sabedoria" },
+    { text:"Nossa maior glória não está em nunca cair, mas em nos levantar cada vez que caímos.", author:"Confúcio", cat:"sabedoria" },
+    { text:"A sabedoria começa quando reconhecemos o que não sabemos.", author:"Sócrates", cat:"sabedoria" },
+    { text:"A educação é a arma mais poderosa que você pode usar para mudar o mundo.", author:"Nelson Mandela", cat:"sabedoria" },
+    { text:"Um investimento em conhecimento sempre paga os melhores juros.", author:"Benjamin Franklin", cat:"sabedoria" },
+    { text:"A dúvida é o princípio da sabedoria.", author:"Aristóteles", cat:"sabedoria" },
 ];
 
-const CAT_LABELS = { all:"All", motivacao:"Motivation", sucesso:"Success", amor:"Love", vida:"Life", sabedoria:"Wisdom" };
+const CAT_LABELS = { all:"Todas", motivacao:"Motivação", sucesso:"Sucesso", amor:"Amor", vida:"Vida", sabedoria:"Sabedoria" };
 
 const state = {
     cat: "all", idx: 0, filtered: [],
-    favs: [],           // local cache synced with the database
+    favs: [],
     theme: localStorage.getItem("uplift_theme") || "purple",
     favOpen: false,
     userId: null,
 };
 
-/* ─── Deterministic algorithm — same quote of the day for everyone ─── */
+/* ─── Algoritmo determinístico — mesma frase do dia para todos ─── */
 function dateHash(date) {
     const s = date.toISOString().split('T')[0];
     let h = 0;
@@ -78,7 +78,7 @@ function seededShuffle(arr, seed) {
 const getFiltered   = () => state.cat === "all" ? QUOTES : QUOTES.filter(q => q.cat === state.cat);
 const buildFiltered = () => { state.filtered = seededShuffle(getFiltered(), dateHash(new Date())); state.idx = 0; };
 
-/* ─── Anonymous auth — no login, but persistent identity ─── */
+/* ─── Autenticação anônima — sem login, mas identidade persistente ─── */
 async function initAuth() {
     const { data: { session } } = await sb.auth.getSession();
     if (session) {
@@ -90,7 +90,7 @@ async function initAuth() {
     if (state.userId) await syncFavs();
 }
 
-/* ─── Favorites (database) ─── */
+/* ─── Favoritos (banco de dados) ─── */
 async function syncFavs() {
     const { data } = await sb.from('favorites')
         .select('quote_text, quote_author, quote_cat')
@@ -114,12 +114,12 @@ async function toggleFav(quote) {
 }
 
 async function clearAllFavs() {
-    if (!confirm('Remove all favorites?')) return;
+    if (!confirm('Remover todos os favoritos?')) return;
     await sb.from('favorites').delete().neq('id', '00000000-0000-0000-0000-000000000000');
     await syncFavs();
 }
 
-/* ─── Render ─── */
+/* ─── Renderização ─── */
 function renderQuote() {
     const q = state.filtered[state.idx];
     const card = document.getElementById('quoteCard');
@@ -142,7 +142,7 @@ function renderFavList() {
                <p>"${f.text}"</p><span>— ${f.author}</span>
                <button class="rm-fav" data-text="${encodeURIComponent(f.text)}"><i class="fas fa-times"></i></button>
              </div>`).join('')
-        : '<p class="empty-msg">No favorites yet.</p>';
+        : '<p class="empty-msg">Nenhum favorito ainda.</p>';
 }
 
 function setTheme(theme) {
@@ -153,40 +153,40 @@ function setTheme(theme) {
         d.classList.toggle('active', d.dataset.theme === theme));
 }
 
-/* ─── Export favorites ─── */
+/* ─── Exportar favoritos ─── */
 function exportFavs() {
     if (!state.favs.length) return;
     const lines = state.favs.map(f => `"${f.text}"\n  — ${f.author}`).join('\n\n');
-    const full  = `My Favorites — Uplift\n${'─'.repeat(28)}\n\n${lines}\n\nExported on ${new Date().toLocaleDateString('en-US')}`;
+    const full  = `Meus Favoritos — Uplift\n${'─'.repeat(28)}\n\n${lines}\n\nExportado em ${new Date().toLocaleDateString('pt-BR')}`;
     navigator.clipboard.writeText(full).then(() => {
         const btn = document.getElementById('exportFavsBtn');
         const orig = btn.innerHTML;
-        btn.textContent = 'Copied!';
+        btn.textContent = 'Copiado!';
         setTimeout(() => { btn.innerHTML = orig; }, 1800);
     }).catch(() => {
         const blob = new Blob([full], { type: 'text/plain' });
         const a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
-        a.download = 'favorites-uplift.txt';
+        a.download = 'favoritos-uplift.txt';
         a.click();
         URL.revokeObjectURL(a.href);
     });
 }
 
-/* ─── Quote submission ─── */
+/* ─── Envio de frase sugerida ─── */
 async function submitQuote() {
     const text   = document.getElementById('subText').value.trim();
     const author = document.getElementById('subAuthor').value.trim();
     const cat    = document.getElementById('subCat').value;
     if (!text || !author) {
-        document.getElementById('subError').textContent = 'Quote and author are required.';
+        document.getElementById('subError').textContent = 'A frase e o autor são obrigatórios.';
         return;
     }
     const { error } = await sb.from('quote_submissions').insert({
         text, author, cat, submitted_by: state.userId,
     });
     if (error) {
-        document.getElementById('subError').textContent = 'Error sending. Please try again.';
+        document.getElementById('subError').textContent = 'Erro ao enviar. Tente novamente.';
         return;
     }
     document.getElementById('subText').value   = '';
@@ -195,17 +195,17 @@ async function submitQuote() {
     document.getElementById('submitModal').classList.remove('open');
     const btn = document.getElementById('btnSubmitQuote');
     const orig = btn.innerHTML;
-    btn.textContent = 'Sent! Thank you.';
+    btn.textContent = 'Enviado! Obrigado.';
     setTimeout(() => { btn.innerHTML = orig; }, 2500);
 }
 
-/* ─── Init ─── */
+/* ─── Inicialização ─── */
 document.addEventListener('DOMContentLoaded', () => {
     setTheme(state.theme);
     buildFiltered();
     renderQuote();
 
-    initAuth(); // start anonymous session and load favorites from database
+    initAuth();
 
     document.querySelectorAll('.cat-btn').forEach(btn =>
         btn.addEventListener('click', () => {
@@ -227,12 +227,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('shareBtn').addEventListener('click', () => {
         const q = state.filtered[state.idx];
-        const text = `"${q.text}" — ${q.author}\n\nUplift · motivational quotes`;
+        const text = `"${q.text}" — ${q.author}\n\nUplift · frases motivacionais`;
         if (navigator.share) navigator.share({ title: 'Uplift', text });
         else navigator.clipboard.writeText(text).then(() => {
             const btn = document.getElementById('shareBtn');
             const orig = btn.innerHTML;
-            btn.textContent = 'Copied!';
+            btn.textContent = 'Copiado!';
             setTimeout(() => { btn.innerHTML = orig; }, 1800);
         });
     });
@@ -244,7 +244,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (state.favOpen) renderFavList();
     });
 
-    /* Event delegation — remover favorito */
     document.getElementById('favList').addEventListener('click', e => {
         const btn = e.target.closest('.rm-fav');
         if (!btn) return;
@@ -255,7 +254,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('exportFavsBtn').addEventListener('click', exportFavs);
     document.getElementById('clearFavs').addEventListener('click', clearAllFavs);
 
-    /* Submission modal */
     document.getElementById('btnOpenSubmit').addEventListener('click', () =>
         document.getElementById('submitModal').classList.add('open'));
     document.getElementById('btnCancelSubmit').addEventListener('click', () =>
