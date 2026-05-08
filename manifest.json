@@ -1,0 +1,12 @@
+{
+  "name": "Uplift — Frases Motivacionais",
+  "short_name": "Uplift",
+  "description": "Frases motivacionais diárias com favoritos no Supabase e 5 temas",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0d0d1a",
+  "theme_color": "#8b5cf6",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
