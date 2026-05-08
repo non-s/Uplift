@@ -50,13 +50,13 @@ const CAT_LABELS = { all:"All", motivacao:"Motivation", sucesso:"Success", amor:
 
 const state = {
     cat: "all", idx: 0, filtered: [],
-    favs: [],           // cache local sincronizado com o banco
+    favs: [],           // local cache synced with the database
     theme: localStorage.getItem("uplift_theme") || "purple",
     favOpen: false,
     userId: null,
 };
 
-/* ─── Algoritmo determinístico — mesma frase do dia para todos ─── */
+/* ─── Deterministic algorithm — same quote of the day for everyone ─── */
 function dateHash(date) {
     const s = date.toISOString().split('T')[0];
     let h = 0;
@@ -78,7 +78,7 @@ function seededShuffle(arr, seed) {
 const getFiltered   = () => state.cat === "all" ? QUOTES : QUOTES.filter(q => q.cat === state.cat);
 const buildFiltered = () => { state.filtered = seededShuffle(getFiltered(), dateHash(new Date())); state.idx = 0; };
 
-/* ─── Auth anônima — sem login, mas com identidade persistente ─── */
+/* ─── Anonymous auth — no login, but persistent identity ─── */
 async function initAuth() {
     const { data: { session } } = await sb.auth.getSession();
     if (session) {
@@ -90,7 +90,7 @@ async function initAuth() {
     if (state.userId) await syncFavs();
 }
 
-/* ─── Favoritos (banco de dados) ─── */
+/* ─── Favorites (database) ─── */
 async function syncFavs() {
     const { data } = await sb.from('favorites')
         .select('quote_text, quote_author, quote_cat')
@@ -153,7 +153,7 @@ function setTheme(theme) {
         d.classList.toggle('active', d.dataset.theme === theme));
 }
 
-/* ─── Exportar favoritos ─── */
+/* ─── Export favorites ─── */
 function exportFavs() {
     if (!state.favs.length) return;
     const lines = state.favs.map(f => `"${f.text}"\n  — ${f.author}`).join('\n\n');
@@ -167,13 +167,13 @@ function exportFavs() {
         const blob = new Blob([full], { type: 'text/plain' });
         const a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
-        a.download = 'favoritos-uplift.txt';
+        a.download = 'favorites-uplift.txt';
         a.click();
         URL.revokeObjectURL(a.href);
     });
 }
 
-/* ─── Submissão de frase ─── */
+/* ─── Quote submission ─── */
 async function submitQuote() {
     const text   = document.getElementById('subText').value.trim();
     const author = document.getElementById('subAuthor').value.trim();
@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
     buildFiltered();
     renderQuote();
 
-    initAuth(); // inicia sessão anônima e carrega favoritos do banco
+    initAuth(); // start anonymous session and load favorites from database
 
     document.querySelectorAll('.cat-btn').forEach(btn =>
         btn.addEventListener('click', () => {
@@ -255,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('exportFavsBtn').addEventListener('click', exportFavs);
     document.getElementById('clearFavs').addEventListener('click', clearAllFavs);
 
-    /* Modal de submissão */
+    /* Submission modal */
     document.getElementById('btnOpenSubmit').addEventListener('click', () =>
         document.getElementById('submitModal').classList.add('open'));
     document.getElementById('btnCancelSubmit').addEventListener('click', () =>
