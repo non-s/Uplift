@@ -92,7 +92,7 @@ async function initAuth() {
 
 /* ─── Favoritos (banco de dados) ─── */
 async function syncFavs() {
-    const { data } = await sb.from('favorites')
+    const { data } = await sb.from('uplift_favorites')
         .select('quote_text, quote_author, quote_cat')
         .order('created_at', { ascending: false });
     state.favs = (data || []).map(r => ({ text: r.quote_text, author: r.quote_author, cat: r.quote_cat }));
@@ -104,9 +104,9 @@ async function syncFavs() {
 async function toggleFav(quote) {
     const isFav = state.favs.some(f => f.text === quote.text);
     if (isFav) {
-        await sb.from('favorites').delete().eq('quote_text', quote.text);
+        await sb.from('uplift_favorites').delete().eq('quote_text', quote.text);
     } else {
-        await sb.from('favorites').insert({
+        await sb.from('uplift_favorites').insert({
             quote_text: quote.text, quote_author: quote.author, quote_cat: quote.cat,
         });
     }
@@ -115,7 +115,7 @@ async function toggleFav(quote) {
 
 async function clearAllFavs() {
     if (!confirm('Remover todos os favoritos?')) return;
-    await sb.from('favorites').delete().neq('id', '00000000-0000-0000-0000-000000000000');
+    await sb.from('uplift_favorites').delete().neq('id', '00000000-0000-0000-0000-000000000000');
     await syncFavs();
 }
 
@@ -182,7 +182,7 @@ async function submitQuote() {
         document.getElementById('subError').textContent = 'A frase e o autor são obrigatórios.';
         return;
     }
-    const { error } = await sb.from('quote_submissions').insert({
+    const { error } = await sb.from('uplift_quote_submissions').insert({
         text, author, cat, submitted_by: state.userId,
     });
     if (error) {
@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const btn = e.target.closest('.rm-fav');
         if (!btn) return;
         const text = decodeURIComponent(btn.dataset.text);
-        sb.from('favorites').delete().eq('quote_text', text).then(() => syncFavs());
+        sb.from('uplift_favorites').delete().eq('quote_text', text).then(() => syncFavs());
     });
 
     document.getElementById('exportFavsBtn').addEventListener('click', exportFavs);
