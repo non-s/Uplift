@@ -57,6 +57,27 @@ const state = {
 };
 
 /* ─── Algoritmo determinístico — mesma frase do dia para todos ─── */
+
+/**
+ * Handles errors: logs to console and shows toast notification.
+ * @param {Error|Object} err
+ * @param {string} [context='']
+ */
+function handleError(err, context = '') {
+  const msg = err?.message || String(err) || 'Erro inesperado';
+  console.error('[handleError]', context, err);
+  toast(msg, 'error');
+}
+
+/**
+ * Returns true only if every provided string is non-empty after trimming.
+ * @param {...string} values
+ * @returns {boolean}
+ */
+function validateRequired(...values) {
+  return values.every(v => typeof v === 'string' && v.trim().length > 0);
+}
+
 function dateHash(date) {
     const s = date.toISOString().split('T')[0];
     let h = 0;
