@@ -1,0 +1,19 @@
+{
+  "name": "Uplift",
+  "short_name": "Uplift",
+  "description": "Frases motivacionais diarias com favoritos sincronizados.",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#0d1117",
+  "theme_color": "#8b5cf6",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
+

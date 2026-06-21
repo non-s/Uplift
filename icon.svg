@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Uplift</title>
+  <desc id="desc">Lightning bolt icon for Uplift.</desc>
+  <rect width="512" height="512" rx="96" fill="#0d1117"/>
+  <path d="M290 56 132 292h111l-22 164 159-237H268l22-163z" fill="#8b5cf6"/>
+  <path d="M290 56 132 292h111l-22 164 159-237H268l22-163z" fill="none" stroke="#f8fafc" stroke-width="14" stroke-linejoin="round" opacity=".22"/>
+</svg>
+
