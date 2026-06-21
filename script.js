@@ -1,6 +1,29 @@
-const SUPABASE_URL      = 'https://bvquyfzllqnbfxncsacn.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ2cXV5ZnpsbHFuYmZ4bmNzYWNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxODU1MzQsImV4cCI6MjA5Mzc2MTUzNH0.xa_rs4bVLoTv58P7U8rDOaPjo1Dqt60q8cR-IWFpbug';
-const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js';
+import { getAuth, signInAnonymously, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js';
+import {
+    addDoc,
+    collection,
+    deleteDoc,
+    doc,
+    getDocs,
+    getFirestore,
+    orderBy,
+    query,
+    serverTimestamp,
+    setDoc,
+} from 'https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js';
+import { firebaseConfig } from './firebase-config.js';
+
+const FIREBASE_CONFIGURED = firebaseConfig?.apiKey && !firebaseConfig.apiKey.includes('REPLACE_');
+const LOCAL_FAVS_KEY = 'uplift_favorites_local';
+
+let auth = null;
+let db = null;
+if (FIREBASE_CONFIGURED) {
+    const app = initializeApp(firebaseConfig);
+    auth = getAuth(app);
+    db = getFirestore(app);
+}
 
 const QUOTES = [
     { text:"A única forma de fazer um ótimo trabalho é amar o que você faz.", author:"Steve Jobs", cat:"motivacao" },
@@ -99,45 +122,144 @@ function seededShuffle(arr, seed) {
 const getFiltered   = () => state.cat === "all" ? QUOTES : QUOTES.filter(q => q.cat === state.cat);
 const buildFiltered = () => { state.filtered = seededShuffle(getFiltered(), dateHash(new Date())); state.idx = 0; };
 
-/* ─── Autenticação anônima — sem login, mas identidade persistente ─── */
-async function initAuth() {
-    const { data: { session } } = await sb.auth.getSession();
-    if (session) {
-        state.userId = session.user.id;
-    } else {
-        const { data } = await sb.auth.signInAnonymously();
-        state.userId = data.user?.id;
+function favoriteDocId(text) {
+    let hash = 2166136261;
+    for (let i = 0; i < text.length; i++) {
+        hash ^= text.charCodeAt(i);
+        hash = Math.imul(hash, 16777619);
     }
-    if (state.userId) await syncFavs();
+    return (hash >>> 0).toString(16);
 }
 
-/* ─── Favoritos (banco de dados) ─── */
-async function syncFavs() {
-    const { data } = await sb.from('uplift_favorites')
-        .select('quote_text, quote_author, quote_cat')
-        .order('created_at', { ascending: false });
-    state.favs = (data || []).map(r => ({ text: r.quote_text, author: r.quote_author, cat: r.quote_cat }));
+function loadLocalFavs() {
+    try { return JSON.parse(localStorage.getItem(LOCAL_FAVS_KEY) || '[]'); }
+    catch { return []; }
+}
+
+function saveLocalFavs() {
+    localStorage.setItem(LOCAL_FAVS_KEY, JSON.stringify(state.favs));
+}
+
+function updateFavUi() {
     document.getElementById('favCount').textContent = state.favs.length;
     if (state.favOpen) renderFavList();
     renderQuote();
 }
 
+function favCollectionRef() {
+    return collection(db, 'uplift_users', state.userId, 'favorites');
+}
+
+function favDocRef(text) {
+    return doc(db, 'uplift_users', state.userId, 'favorites', favoriteDocId(text));
+}
+
+/* ─── Autenticação anônima — sem login, mas identidade persistente ─── */
+async function initAuth() {
+    if (!FIREBASE_CONFIGURED) {
+        state.userId = 'local';
+        state.favs = loadLocalFavs();
+        updateFavUi();
+        return;
+    }
+
+    onAuthStateChanged(auth, async user => {
+        if (!user) return;
+        state.userId = user.uid;
+        await syncFavs();
+    });
+
+    if (!auth.currentUser) {
+        try { await signInAnonymously(auth); }
+        catch (err) { handleError(err, 'firebase-auth'); }
+    }
+}
+
+/* ─── Favoritos (banco de dados) ─── */
+async function syncFavs() {
+    if (!FIREBASE_CONFIGURED) {
+        state.favs = loadLocalFavs();
+        updateFavUi();
+        return;
+    }
+    if (!state.userId) return;
+
+    try {
+        const snapshot = await getDocs(query(favCollectionRef(), orderBy('created_at', 'desc')));
+        state.favs = snapshot.docs.map(item => {
+            const row = item.data();
+            return { text: row.quote_text, author: row.quote_author, cat: row.quote_cat };
+        });
+        updateFavUi();
+    } catch (err) {
+        handleError(err, 'syncFavs');
+    }
+}
+
 async function toggleFav(quote) {
     const isFav = state.favs.some(f => f.text === quote.text);
-    if (isFav) {
-        await sb.from('uplift_favorites').delete().eq('quote_text', quote.text);
-    } else {
-        await sb.from('uplift_favorites').insert({
-            quote_text: quote.text, quote_author: quote.author, quote_cat: quote.cat,
-        });
+    if (!FIREBASE_CONFIGURED) {
+        state.favs = isFav
+            ? state.favs.filter(f => f.text !== quote.text)
+            : [{ text: quote.text, author: quote.author, cat: quote.cat }, ...state.favs];
+        saveLocalFavs();
+        updateFavUi();
+        return;
     }
-    await syncFavs();
+
+    try {
+        if (isFav) {
+            await deleteDoc(favDocRef(quote.text));
+        } else {
+            await setDoc(favDocRef(quote.text), {
+                quote_text: quote.text,
+                quote_author: quote.author,
+                quote_cat: quote.cat,
+                created_at: serverTimestamp(),
+            });
+        }
+        await syncFavs();
+    } catch (err) {
+        handleError(err, 'toggleFav');
+    }
+}
+
+async function removeFavByText(text) {
+    if (!FIREBASE_CONFIGURED) {
+        state.favs = state.favs.filter(f => f.text !== text);
+        saveLocalFavs();
+        updateFavUi();
+        return;
+    }
+
+    try {
+        await deleteDoc(favDocRef(text));
+        await syncFavs();
+    } catch (err) {
+        handleError(err, 'removeFavByText');
+    }
+}
+
+async function clearRemoteFavs() {
+    const snapshot = await getDocs(favCollectionRef());
+    await Promise.all(snapshot.docs.map(item => deleteDoc(item.ref)));
 }
 
 async function clearAllFavs() {
     if (!confirm('Remover todos os favoritos?')) return;
-    await sb.from('uplift_favorites').delete().neq('id', '00000000-0000-0000-0000-000000000000');
-    await syncFavs();
+    if (!FIREBASE_CONFIGURED) {
+        state.favs = [];
+        saveLocalFavs();
+        updateFavUi();
+        return;
+    }
+
+    try {
+        await clearRemoteFavs();
+        await syncFavs();
+    } catch (err) {
+        handleError(err, 'clearAllFavs');
+    }
 }
 
 /* ─── Renderização ─── */
@@ -203,10 +325,20 @@ async function submitQuote() {
         document.getElementById('subError').textContent = 'A frase e o autor são obrigatórios.';
         return;
     }
-    const { error } = await sb.from('uplift_quote_submissions').insert({
-        text, author, cat, submitted_by: state.userId,
-    });
-    if (error) {
+    if (!FIREBASE_CONFIGURED || !state.userId) {
+        document.getElementById('subError').textContent = 'Configure o Firebase para enviar sugestÃµes.';
+        return;
+    }
+    try {
+        await addDoc(collection(db, 'uplift_quote_submissions'), {
+            text,
+            author,
+            cat,
+            submitted_by: state.userId,
+            created_at: serverTimestamp(),
+        });
+    } catch (err) {
+        handleError(err, 'submitQuote');
         document.getElementById('subError').textContent = 'Erro ao enviar. Tente novamente.';
         return;
     }
@@ -269,7 +401,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const btn = e.target.closest('.rm-fav');
         if (!btn) return;
         const text = decodeURIComponent(btn.dataset.text);
-        sb.from('uplift_favorites').delete().eq('quote_text', text).then(() => syncFavs());
+        removeFavByText(text);
     });
 
     document.getElementById('exportFavsBtn').addEventListener('click', exportFavs);

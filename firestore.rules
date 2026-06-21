@@ -1,0 +1,22 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /uplift_users/{userId}/favorites/{favoriteId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    match /uplift_quote_submissions/{submissionId} {
+      allow create: if request.auth != null
+        && request.resource.data.submitted_by == request.auth.uid
+        && request.resource.data.text is string
+        && request.resource.data.text.size() >= 1
+        && request.resource.data.text.size() <= 500
+        && request.resource.data.author is string
+        && request.resource.data.author.size() >= 1
+        && request.resource.data.author.size() <= 120
+        && request.resource.data.cat in ['motivacao', 'sucesso', 'amor', 'vida', 'sabedoria'];
+      allow read, update, delete: if false;
+    }
+  }
+}
