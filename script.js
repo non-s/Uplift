@@ -326,7 +326,7 @@ async function submitQuote() {
         return;
     }
     if (!FIREBASE_CONFIGURED || !state.userId) {
-        document.getElementById('subError').textContent = 'Configure o Firebase para enviar sugestÃµes.';
+        document.getElementById('subError').textContent = 'Configure o Firebase para enviar sugestões.';
         return;
     }
     try {
