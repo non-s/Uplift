@@ -7,6 +7,7 @@ import {
     doc,
     getDocs,
     getFirestore,
+    limit as firestoreLimit,
     orderBy,
     query,
     serverTimestamp,
@@ -16,6 +17,14 @@ import { firebaseConfig } from './firebase-config.js';
 
 const FIREBASE_CONFIGURED = firebaseConfig?.apiKey && !firebaseConfig.apiKey.includes('REPLACE_');
 const LOCAL_FAVS_KEY = 'uplift_favorites_local';
+const SUBMISSION_LAST_SENT_KEY = 'uplift_quote_submission_last_sent_at';
+const UPLIFT_LIMITS = Object.freeze({
+    favorites: 200,
+    quoteText: 500,
+    quoteAuthor: 120,
+    submitCooldownMs: 60000,
+});
+const VALID_CATS = ['motivacao', 'sucesso', 'amor', 'vida', 'sabedoria'];
 
 let auth = null;
 let db = null;
@@ -137,7 +146,7 @@ function loadLocalFavs() {
 }
 
 function saveLocalFavs() {
-    localStorage.setItem(LOCAL_FAVS_KEY, JSON.stringify(state.favs));
+    localStorage.setItem(LOCAL_FAVS_KEY, JSON.stringify(state.favs.slice(0, UPLIFT_LIMITS.favorites)));
 }
 
 function updateFavUi() {
@@ -185,7 +194,11 @@ async function syncFavs() {
     if (!state.userId) return;
 
     try {
-        const snapshot = await getDocs(query(favCollectionRef(), orderBy('created_at', 'desc')));
+        const snapshot = await getDocs(query(
+            favCollectionRef(),
+            orderBy('created_at', 'desc'),
+            firestoreLimit(UPLIFT_LIMITS.favorites),
+        ));
         state.favs = snapshot.docs.map(item => {
             const row = item.data();
             return { text: row.quote_text, author: row.quote_author, cat: row.quote_cat };
@@ -201,7 +214,7 @@ async function toggleFav(quote) {
     if (!FIREBASE_CONFIGURED) {
         state.favs = isFav
             ? state.favs.filter(f => f.text !== quote.text)
-            : [{ text: quote.text, author: quote.author, cat: quote.cat }, ...state.favs];
+            : [{ text: quote.text, author: quote.author, cat: quote.cat }, ...state.favs].slice(0, UPLIFT_LIMITS.favorites);
         saveLocalFavs();
         updateFavUi();
         return;
@@ -241,7 +254,7 @@ async function removeFavByText(text) {
 }
 
 async function clearRemoteFavs() {
-    const snapshot = await getDocs(favCollectionRef());
+    const snapshot = await getDocs(query(favCollectionRef(), firestoreLimit(UPLIFT_LIMITS.favorites)));
     await Promise.all(snapshot.docs.map(item => deleteDoc(item.ref)));
 }
 
@@ -279,13 +292,34 @@ function renderQuote() {
 }
 
 function renderFavList() {
-    document.getElementById('favList').innerHTML = state.favs.length
-        ? state.favs.map(f =>
-            `<div class="fav-item">
-               <p>"${f.text}"</p><span>— ${f.author}</span>
-               <button class="rm-fav" data-text="${encodeURIComponent(f.text)}"><i class="fas fa-times"></i></button>
-             </div>`).join('')
-        : '<p class="empty-msg">Nenhum favorito ainda.</p>';
+    const list = document.getElementById('favList');
+    list.replaceChildren();
+    if (!state.favs.length) {
+        const empty = document.createElement('p');
+        empty.className = 'empty-msg';
+        empty.textContent = 'Nenhum favorito ainda.';
+        list.append(empty);
+        return;
+    }
+    const fragment = document.createDocumentFragment();
+    state.favs.forEach(f => {
+        const item = document.createElement('div');
+        item.className = 'fav-item';
+        const text = document.createElement('p');
+        text.textContent = `"${f.text}"`;
+        const author = document.createElement('span');
+        author.textContent = `— ${f.author}`;
+        const button = document.createElement('button');
+        button.className = 'rm-fav';
+        button.dataset.text = encodeURIComponent(f.text);
+        button.setAttribute('aria-label', 'Remover favorito');
+        const icon = document.createElement('i');
+        icon.className = 'fas fa-times';
+        button.append(icon);
+        item.append(text, author, button);
+        fragment.append(item);
+    });
+    list.append(fragment);
 }
 
 function setTheme(theme) {
@@ -317,16 +351,44 @@ function exportFavs() {
 }
 
 /* ─── Envio de frase sugerida ─── */
+function submissionCooldownRemaining() {
+    const last = Number(localStorage.getItem(SUBMISSION_LAST_SENT_KEY) || 0);
+    return Math.max(0, UPLIFT_LIMITS.submitCooldownMs - (Date.now() - last));
+}
+
+function normalizeSubmission() {
+    return {
+        text: document.getElementById('subText').value.trim().slice(0, UPLIFT_LIMITS.quoteText),
+        author: document.getElementById('subAuthor').value.trim().slice(0, UPLIFT_LIMITS.quoteAuthor),
+        cat: document.getElementById('subCat').value,
+        honeypot: document.getElementById('subWebsite')?.value.trim() || '',
+    };
+}
+
 async function submitQuote() {
-    const text   = document.getElementById('subText').value.trim();
-    const author = document.getElementById('subAuthor').value.trim();
-    const cat    = document.getElementById('subCat').value;
-    if (!text || !author) {
-        document.getElementById('subError').textContent = 'A frase e o autor são obrigatórios.';
+    const { text, author, cat, honeypot } = normalizeSubmission();
+    if (honeypot) {
+        document.getElementById('subText').value = '';
+        document.getElementById('subAuthor').value = '';
+        document.getElementById('subError').textContent = '';
+        document.getElementById('submitModal').classList.remove('open');
+        return;
+    }
+    if (!validateRequired(text, author)) {
+        document.getElementById('subError').textContent = 'A frase e o autor sao obrigatorios.';
+        return;
+    }
+    if (!VALID_CATS.includes(cat)) {
+        document.getElementById('subError').textContent = 'Categoria invalida.';
+        return;
+    }
+    const cooldown = submissionCooldownRemaining();
+    if (cooldown > 0) {
+        document.getElementById('subError').textContent = `Aguarde ${Math.ceil(cooldown / 1000)}s antes de enviar outra sugestao.`;
         return;
     }
     if (!FIREBASE_CONFIGURED || !state.userId) {
-        document.getElementById('subError').textContent = 'Configure o Firebase para enviar sugestões.';
+        document.getElementById('subError').textContent = 'Configure o Firebase para enviar sugestoes.';
         return;
     }
     try {
@@ -337,6 +399,7 @@ async function submitQuote() {
             submitted_by: state.userId,
             created_at: serverTimestamp(),
         });
+        localStorage.setItem(SUBMISSION_LAST_SENT_KEY, String(Date.now()));
     } catch (err) {
         handleError(err, 'submitQuote');
         document.getElementById('subError').textContent = 'Erro ao enviar. Tente novamente.';

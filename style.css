@@ -77,6 +77,7 @@ main { max-width:860px;margin:0 auto;padding:5.5rem 1.5rem 3rem; }
 .submit-box { background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:1.8rem;width:100%;max-width:400px;display:flex;flex-direction:column;gap:.85rem; }
 .submit-box h3 { font-size:.95rem;color:var(--accent-light); }
 .sub-field { width:100%;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:.65rem .9rem;font-size:.86rem;font-family:'Inter',sans-serif;outline:none;transition:.2s;resize:vertical; }
+.sub-hp { position:absolute;left:-10000px;width:1px;height:1px;opacity:0;pointer-events:none; }
 .sub-field:focus { border-color:var(--accent); }
 .sub-error { font-size:.76rem;color:#f43f5e;min-height:1rem; }
 .sub-actions { display:flex;gap:.65rem;justify-content:flex-end; }

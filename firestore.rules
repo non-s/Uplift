@@ -16,13 +16,30 @@ service cloud.firestore {
     }
 
     function validUpliftFavorite(data) {
-      return data.quote_text is string
+      return data.keys().hasOnly(['quote_text', 'quote_author', 'quote_cat', 'created_at'])
+        && data.keys().hasAll(['quote_text', 'quote_author', 'quote_cat', 'created_at'])
+        && data.quote_text is string
         && data.quote_text.size() >= 1
         && data.quote_text.size() <= 500
         && data.quote_author is string
         && data.quote_author.size() >= 1
         && data.quote_author.size() <= 120
-        && upliftCategory(data.quote_cat);
+        && upliftCategory(data.quote_cat)
+        && data.created_at == request.time;
+    }
+
+    function validUpliftSubmission(data) {
+      return data.keys().hasOnly(['text', 'author', 'cat', 'submitted_by', 'created_at'])
+        && data.keys().hasAll(['text', 'author', 'cat', 'submitted_by', 'created_at'])
+        && data.submitted_by == request.auth.uid
+        && data.text is string
+        && data.text.size() >= 1
+        && data.text.size() <= 500
+        && data.author is string
+        && data.author.size() >= 1
+        && data.author.size() <= 120
+        && upliftCategory(data.cat)
+        && data.created_at == request.time;
     }
 
     function hasTakProfile() {
@@ -104,14 +121,7 @@ service cloud.firestore {
 
     match /uplift_quote_submissions/{submissionId} {
       allow create: if signedIn()
-        && request.resource.data.submitted_by == request.auth.uid
-        && request.resource.data.text is string
-        && request.resource.data.text.size() >= 1
-        && request.resource.data.text.size() <= 500
-        && request.resource.data.author is string
-        && request.resource.data.author.size() >= 1
-        && request.resource.data.author.size() <= 120
-        && request.resource.data.cat in ['motivacao', 'sucesso', 'amor', 'vida', 'sabedoria'];
+        && validUpliftSubmission(request.resource.data);
       allow read, update, delete: if false;
     }
 
