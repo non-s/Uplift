@@ -27,8 +27,9 @@
 <div class="submit-modal" id="submitModal">
     <div class="submit-box">
         <h3>Sugerir uma frase</h3>
-        <textarea class="sub-field" id="subText" placeholder="Digite a frase..." rows="3"></textarea>
-        <input class="sub-field" id="subAuthor" placeholder="Autor" />
+        <textarea class="sub-field" id="subText" placeholder="Digite a frase..." rows="3" maxlength="500"></textarea>
+        <input class="sub-field" id="subAuthor" placeholder="Autor" maxlength="120" />
+        <input class="sub-hp" id="subWebsite" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
         <select class="sub-field" id="subCat">
             <option value="motivacao">Motivação</option>
             <option value="sucesso">Sucesso</option>
