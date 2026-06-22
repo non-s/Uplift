@@ -67,7 +67,7 @@ if (exists(".github/workflows/quality.yml")) {
 
 if (exists(".github/workflows/firebase-deploy.yml")) {
   const deploy = read(".github/workflows/firebase-deploy.yml");
-  for (const token of ["google-github-actions/auth@v3", "SERVICE_ACCOUNT_JSON", "firestore.rules", "firestore.indexes.json", "firebase-tools@latest deploy --only firestore:rules,firestore:indexes"]) {
+  for (const token of ["google-github-actions/auth@v3", "SERVICE_ACCOUNT_JSON", "Check deploy project", "steps.firebase-preflight.outputs.deploy == 'true'", "firestore.rules", "firestore.indexes.json", "firebase-tools@latest deploy --only firestore:rules,firestore:indexes"]) {
     if (!deploy.includes(token)) failures.push(`firebase deploy workflow must include ${token}`);
   }
 }
